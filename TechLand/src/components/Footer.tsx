@@ -1,4 +1,4 @@
-import { Phone, MapPin, Cpu } from "lucide-react";
+import { Cpu } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -57,17 +57,6 @@ const Footer = () => {
               with cutting-edge software solutions tailored to your needs.
             </p>
             
-            {/* Contact Info */}
-            <div className="space-y-4">
-              <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-primary" />
-                <span>(+971) 561803315</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <MapPin className="w-5 h-5 text-primary" />
-                <span>Sharjah Media City, Dubai, UAE</span>
-              </div>
-            </div>
           </div>
 
           {/* Footer Sections */}

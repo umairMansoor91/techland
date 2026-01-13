@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ssh root@84.247.177.56 \"cd /var/www/techland/backend && source venv/bin/activate && python manage.py migrate --noinput\")",
+      "Bash(ssh root@84.247.177.56 \"sudo -u postgres psql -c \"\"ALTER USER techland_user WITH PASSWORD ''techland123'';\"\" && cat > /var/www/techland/backend/.env << ''EOF''\nDEBUG=False\nSECRET_KEY=e3ciyz6t84g5rhaxp43ucojaibd2vdel\nALLOWED_HOSTS=84.247.177.56,localhost,127.0.0.1\nDATABASE_URL=postgres://techland_user:techland123@localhost:5432/techland_db\nREDIS_URL=redis://localhost:6379/1\nCORS_ALLOWED_ORIGINS=http://84.247.177.56,https://84.247.177.56\nRECAPTCHA_PUBLIC_KEY=\nRECAPTCHA_PRIVATE_KEY=\nEOF\")",
+      "Bash(ssh root@84.247.177.56 \"cd /var/www/techland/backend && source venv/bin/activate && python manage.py migrate --noinput && python manage.py collectstatic --noinput\")"
+    ]
+  }
+}
