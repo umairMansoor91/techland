@@ -4,19 +4,10 @@ import ClientInquiryForm from "@/components/ClientInquiryForm";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Mail, Phone, MapPin, Clock, Users, ArrowLeft, Copy, CheckCircle2 } from "lucide-react";
-import { useState } from "react";
+import { Clock, Users, ArrowLeft, CheckCircle2, MessageSquare } from "lucide-react";
 import heroVision from "@/assets/hero-vision.jpg";
 
 const LetsTalkBusiness = () => {
-  const [copied, setCopied] = useState(false);
-
-  const copyEmail = () => {
-    navigator.clipboard.writeText("info@techland.com");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -40,12 +31,12 @@ const LetsTalkBusiness = () => {
             <p className="text-xl text-white/80 mb-12 leading-relaxed">
               Connect with our experts to discuss your digital transformation journey. We're here to turn your vision into reality.
             </p>
-            <Button 
+            <Button
               onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}
-              size="lg" 
+              size="lg"
               className="px-8 bg-white text-primary hover:bg-white/90"
             >
-              <Mail className="w-5 h-5 mr-2" />
+              <MessageSquare className="w-5 h-5 mr-2" />
               Get In Touch
             </Button>
           </div>
@@ -72,72 +63,41 @@ const LetsTalkBusiness = () => {
 
               {/* Contact Info Sidebar */}
               <div className="lg:col-span-2 space-y-6">
-                {/* Email Card */}
+                {/* Response Time Card */}
                 <Card className="p-6 bg-gradient-to-br from-primary/5 to-primary-glow/10 border-primary/20">
                   <div className="text-center">
                     <div className="w-14 h-14 bg-gradient-to-br from-primary to-primary-glow rounded-xl flex items-center justify-center mx-auto mb-4">
-                      <Mail className="w-7 h-7 text-white" />
+                      <Clock className="w-7 h-7 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold mb-3">Email Us Directly</h3>
-                    <div className="flex flex-col items-center gap-2 mb-4">
-                      <span className="text-lg font-mono text-primary break-all">info@techland.com</span>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={copyEmail}
-                        className="flex items-center gap-2"
-                      >
-                        {copied ? (
-                          <CheckCircle2 className="w-4 h-4 text-green-500" />
-                        ) : (
-                          <Copy className="w-4 h-4" />
-                        )}
-                        {copied ? "Copied!" : "Copy"}
-                      </Button>
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                      Response within 2-4 business hours
+                    <h3 className="text-xl font-bold mb-3">Quick Response</h3>
+                    <p className="text-muted-foreground">
+                      We respond to all inquiries within 24-48 hours
                     </p>
                   </div>
                 </Card>
 
-                {/* Phone Card */}
+                {/* Expert Team Card */}
                 <Card className="p-6">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary-glow/30 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Phone className="w-6 h-6 text-primary" />
+                      <Users className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <h4 className="font-semibold mb-1">Call Us</h4>
-                      <p className="text-primary font-mono">(+971) 561803315</p>
-                      <p className="text-sm text-muted-foreground mt-1">Mon-Fri, 9AM-6PM GST</p>
+                      <h4 className="font-semibold mb-1">Expert Consultation</h4>
+                      <p className="text-muted-foreground">Get matched with the right specialist for your project needs</p>
                     </div>
                   </div>
                 </Card>
 
-                {/* Location Card */}
+                {/* Global Support Card */}
                 <Card className="p-6">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary-glow/30 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-6 h-6 text-primary" />
+                      <MessageSquare className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <h4 className="font-semibold mb-1">Visit Us</h4>
-                      <p className="text-muted-foreground">Sharjah Media City</p>
-                      <p className="text-muted-foreground">Dubai, UAE</p>
-                    </div>
-                  </div>
-                </Card>
-
-                {/* Response Time Card */}
-                <Card className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary-glow/30 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Clock className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Quick Response</h4>
-                      <p className="text-muted-foreground">We respond to all inquiries within 24-48 hours</p>
+                      <h4 className="font-semibold mb-1">Global Support</h4>
+                      <p className="text-muted-foreground">24/7 support available for enterprise clients</p>
                     </div>
                   </div>
                 </Card>

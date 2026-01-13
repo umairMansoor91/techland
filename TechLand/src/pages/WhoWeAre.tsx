@@ -3,14 +3,10 @@ import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Users, Target, Award, Globe, Heart, Lightbulb, CheckCircle2, Rocket, Shield } from "lucide-react";
+import { Users, Target, Award, Globe, Heart, Lightbulb, CheckCircle2, Rocket, Shield, User } from "lucide-react";
 import teamCollaboration from "@/assets/team-collaboration.jpg";
 import leadershipMeeting from "@/assets/leadership-meeting.jpg";
 import officeCulture from "@/assets/office-culture.jpg";
-import ceoMuhammad from "@/assets/ceo-muhammad.jpg";
-import cooNuman from "@/assets/coo-numan.jpg";
-import cpoUmair from "@/assets/cpo-umair.jpg";
-import ctoMoazam from "@/assets/cto-moazam.jpg";
 
 const WhoWeAre = () => {
   const values = [
@@ -48,28 +44,24 @@ const WhoWeAre = () => {
 
   const leaders = [
     {
-      name: "Muhammad Ibn Abdul Aziz",
-      role: "Chief Executive Officer",
-      bio: "Visionary leader driving digital transformation and AI innovation across global markets",
-      image: ceoMuhammad
-    },
-    {
-      name: "Numan Khurshid",
-      role: "Chief Operations Officer",
-      bio: "Operations expert ensuring seamless delivery and operational excellence",
-      image: cooNuman
-    },
-    {
       name: "Umair Mansoor",
-      role: "Chief Products Officer",
-      bio: "Product strategist crafting innovative solutions that drive customer success",
-      image: cpoUmair
+      role: "Chief Executive Officer",
+      bio: "Visionary leader driving digital transformation and AI innovation across global markets"
     },
     {
-      name: "Muhammad Moazam",
-      role: "Chief Technical Officer",
-      bio: "Technology architect building next-generation AI and digital platforms",
-      image: ctoMoazam
+      name: "Hamza Rashid",
+      role: "Chief Operations Officer",
+      bio: "Operations expert ensuring seamless delivery and operational excellence"
+    },
+    {
+      name: "Tim Krug",
+      role: "Chief Financial Officer",
+      bio: "Financial strategist optimizing growth and sustainable business performance"
+    },
+    {
+      name: "Dave Sanders",
+      role: "Chief Business Officer",
+      bio: "Business development leader expanding partnerships and market opportunities"
     }
   ];
 
@@ -303,12 +295,8 @@ const WhoWeAre = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             {leaders.map((leader, index) => (
               <Card key={index} className="p-6 text-center hover:shadow-xl transition-all duration-300 group hover:-translate-y-2">
-                <div className="w-32 h-32 mx-auto mb-4 overflow-hidden rounded-full ring-4 ring-primary/20 group-hover:ring-primary/40 transition-all duration-300">
-                  <img
-                    src={leader.image}
-                    alt={`${leader.name} - ${leader.role}`}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
+                <div className="w-24 h-24 mx-auto mb-5 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center ring-4 ring-primary/10 group-hover:ring-primary/30 transition-all duration-300">
+                  <User className="w-10 h-10 text-primary/60 group-hover:text-primary transition-colors duration-300" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{leader.name}</h3>
                 <Badge variant="outline" className="mb-3 text-xs">{leader.role}</Badge>

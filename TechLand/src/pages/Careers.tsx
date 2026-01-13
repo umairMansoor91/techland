@@ -4,7 +4,7 @@ import DeveloperApplicationForm from "@/components/DeveloperApplicationForm";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Briefcase, Users, Award, Mail, MapPin, Clock, Sparkles } from "lucide-react";
+import { Briefcase, Users, Award, MapPin, Clock, Sparkles } from "lucide-react";
 import teamCollaboration from "@/assets/team-collaboration.jpg";
 import officeCulture from "@/assets/office-culture.jpg";
 import leadershpMeeting from "@/assets/leadership-meeting.jpg";
@@ -294,13 +294,6 @@ const Careers = () => {
               <Button size="lg" onClick={() => document.getElementById('application-form')?.scrollIntoView({ behavior: 'smooth' })}>
                 Apply Now
               </Button>
-              <a
-                href="mailto:careers@techland.com"
-                className="text-lg font-mono text-primary hover:text-primary-glow transition-colors flex items-center gap-2"
-              >
-                <Mail className="w-5 h-5" />
-                careers@techland.com
-              </a>
             </div>
           </div>
         </div>

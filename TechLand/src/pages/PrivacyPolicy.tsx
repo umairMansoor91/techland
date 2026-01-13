@@ -194,13 +194,8 @@ const PrivacyPolicy = () => {
               <section>
                 <h2 className="text-2xl font-semibold mb-4">11. Contact Us</h2>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  If you have any questions about this Privacy Policy or how we handle your personal information, please contact us:
+                  If you have any questions about this Privacy Policy or how we handle your personal information, please contact us through our website contact form.
                 </p>
-                <div className="bg-muted/50 p-6 rounded-lg">
-                  <p className="text-muted-foreground mb-2"><strong>Email:</strong> info@techland.com</p>
-                  <p className="text-muted-foreground mb-2"><strong>Phone:</strong> (+971) 561803315</p>
-                  <p className="text-muted-foreground"><strong>Address:</strong> Sharjah Media City, Dubai, UAE</p>
-                </div>
               </section>
             </div>
           </div>
