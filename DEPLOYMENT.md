@@ -2,11 +2,39 @@
 
 Deploy TechLand on a Contabo VPS (Ubuntu 22.04).
 
+## Server Configuration
+
+| Setting | Value |
+|---------|-------|
+| **VPS IP** | `84.247.177.56` |
+| **Domain** | `thetechland.com` |
+| **SSH User** | `root` |
+| **SSH Password** | `saadhamza` |
+| **Database** | PostgreSQL |
+| **DB Name** | `techland_db` |
+| **DB User** | `techland_user` |
+| **DB Password** | `techland123` |
+
+## GitHub Repository
+
+- **URL**: https://github.com/umairMansoor91/techland
+- **Auto-deploy**: Push to `main` branch triggers deployment via GitHub Actions
+
+### GitHub Secrets Required
+
+Add these in Settings → Secrets → Actions:
+
+| Secret | Value |
+|--------|-------|
+| `VPS_HOST` | `84.247.177.56` |
+| `VPS_USERNAME` | `root` |
+| `VPS_PASSWORD` | `saadhamza` |
+
 ## Quick Start
 
 ```bash
 # 1. SSH into your VPS
-ssh root@YOUR_SERVER_IP
+ssh root@84.247.177.56
 
 # 2. Run the setup script
 bash deploy.sh
@@ -190,6 +218,22 @@ pg_dump -U techland_user -h localhost techland_db > backup.sql
 
 ## URLs
 
-- Website: `https://yourdomain.com`
-- Admin: `https://yourdomain.com/admin/`
-- API Docs: `https://yourdomain.com/api/docs/`
+- Website: `https://thetechland.com`
+- Admin: `https://thetechland.com/admin/`
+- API Docs: `https://thetechland.com/api/docs/`
+
+## DNS Configuration
+
+Add these A records in your domain registrar:
+
+| Host | Type | TTL | IP Address |
+|------|------|-----|------------|
+| `@` | A | 4 hrs | `84.247.177.56` |
+| `www` | A | 4 hrs | `84.247.177.56` |
+
+## SSL Setup (After DNS Propagation)
+
+```bash
+ssh root@84.247.177.56
+sudo certbot --nginx -d thetechland.com -d www.thetechland.com
+```
