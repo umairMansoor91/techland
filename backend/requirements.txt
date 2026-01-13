@@ -1,0 +1,30 @@
+# Django Core
+Django>=4.2,<5.0
+djangorestframework>=3.14
+django-cors-headers>=4.3
+
+# Database
+psycopg2-binary>=2.9  # PostgreSQL adapter
+dj-database-url>=1.3  # Database URL parsing
+
+# Caching (for distributed rate limiting)
+django-redis>=5.4
+
+# Security & Spam Protection
+django-ratelimit>=4.1
+django-recaptcha>=4.0
+
+# File handling
+Pillow>=10.0
+
+# Environment variables
+python-dotenv>=1.0
+python-decouple>=3.8
+
+# Production server
+gunicorn>=21.0
+whitenoise>=6.6
+
+# Utilities
+django-filter>=23.5
+drf-spectacular>=0.27  # API documentation

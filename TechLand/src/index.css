@@ -1,0 +1,197 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Professional Software Company Design System */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    /* Primary: Professional Teal */
+    --primary: 174 84% 40%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 174 84% 50%;
+
+    /* Secondary: Professional Dark */
+    --secondary: 220 13% 18%;
+    --secondary-foreground: 0 0% 98%;
+
+    /* Muted: Subtle Grays */
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    /* Accent: Bright Teal */
+    --accent: 174 84% 50%;
+    --accent-foreground: 220 13% 18%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 174 84% 40%;
+
+    /* Custom Design System */
+    --hero-bg: 220 13% 9%;
+    --hero-text: 0 0% 100%;
+    --tech-gradient: linear-gradient(135deg, hsl(174 84% 40%), hsl(174 84% 50%));
+    --hero-gradient: linear-gradient(135deg, hsl(220 13% 9%) 0%, hsl(220 13% 15%) 100%);
+    --glow-gradient: linear-gradient(90deg, transparent, hsl(174 84% 50% / 0.3), transparent);
+    --shadow-tech: 0 25px 50px -12px hsl(174 84% 40% / 0.4);
+    --shadow-elegant: 0 10px 40px -10px hsl(220 13% 9% / 0.3);
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --animation-float: float 6s ease-in-out infinite;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 13% 6%;
+    --foreground: 0 0% 98%;
+
+    --card: 220 13% 8%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 13% 8%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 174 84% 55%;
+    --primary-foreground: 220 13% 6%;
+    --primary-glow: 174 84% 65%;
+
+    --secondary: 220 13% 12%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 220 13% 12%;
+    --muted-foreground: 220 9% 70%;
+
+    --accent: 174 84% 65%;
+    --accent-foreground: 220 13% 6%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 13% 18%;
+    --input: 220 13% 18%;
+    --ring: 174 84% 55%;
+
+    --hero-bg: 220 13% 4%;
+    --hero-text: 0 0% 98%;
+    --tech-gradient: linear-gradient(135deg, hsl(174 84% 55%), hsl(174 84% 65%));
+    --hero-gradient: linear-gradient(135deg, hsl(220 13% 4%) 0%, hsl(220 13% 8%) 100%);
+    --glow-gradient: linear-gradient(90deg, transparent, hsl(174 84% 65% / 0.4), transparent);
+    --shadow-tech: 0 25px 50px -12px hsl(174 84% 55% / 0.5);
+    --shadow-elegant: 0 10px 40px -10px hsl(220 13% 4% / 0.6);
+    
+    --sidebar-background: 240 5.9% 8%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 12%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground overflow-x-hidden;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Custom Animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes slide-up {
+    from { 
+      opacity: 0; 
+      transform: translateY(30px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+  }
+
+  .animate-float {
+    animation: var(--animation-float);
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.6s ease-out;
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    background: var(--tech-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Tech Glow Effects */
+  .tech-glow {
+    box-shadow: var(--shadow-tech);
+  }
+
+  .hero-glow::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--glow-gradient);
+    animation: glow-pulse 4s ease-in-out infinite;
+  }
+
+  /* Disable transforms on stable elements */
+  .transform-none {
+    transform: none !important;
+  }
+
+  .transform-none:hover {
+    transform: none !important;
+  }
+}

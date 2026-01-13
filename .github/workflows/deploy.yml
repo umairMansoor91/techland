@@ -1,0 +1,49 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          script: |
+            set -e
+
+            # Navigate to project directory
+            cd /var/www/techland
+
+            # Pull latest code
+            git pull origin main
+
+            # Backend deployment
+            cd backend
+            source venv/bin/activate
+            pip install -r requirements.txt --quiet
+            python manage.py migrate --noinput
+            python manage.py collectstatic --noinput
+            deactivate
+
+            # Frontend deployment
+            cd ../TechLand
+            npm install --silent
+            npm run build
+            rm -rf /var/www/techland/frontend/*
+            cp -r dist/* /var/www/techland/frontend/
+
+            # Restart services
+            sudo systemctl restart techland
+
+            echo "Deployment completed successfully!"

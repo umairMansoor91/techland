@@ -1,0 +1,27 @@
+# Systemd service file for TechLand Django API
+# Place this in /etc/systemd/system/techland.service
+
+[Unit]
+Description=TechLand Django API (Gunicorn)
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/techland/backend
+Environment="PATH=/var/www/techland/backend/venv/bin"
+EnvironmentFile=/var/www/techland/backend/.env
+ExecStart=/var/www/techland/backend/venv/bin/gunicorn --config gunicorn.conf.py techland.wsgi:application
+ExecReload=/bin/kill -s HUP $MAINPID
+Restart=always
+RestartSec=5
+
+# Security hardening
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/www/techland/backend/media /var/log/gunicorn
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
