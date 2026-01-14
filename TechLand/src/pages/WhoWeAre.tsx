@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Users, Target, Award, Globe, Heart, Lightbulb, CheckCircle2, Rocket, Shield, User } from "lucide-react";
+import { Users, Target, Award, Heart, Lightbulb, CheckCircle2, Rocket, Shield, Zap, Handshake, TrendingUp } from "lucide-react";
 import teamCollaboration from "@/assets/team-collaboration.jpg";
 import leadershipMeeting from "@/assets/leadership-meeting.jpg";
 import officeCulture from "@/assets/office-culture.jpg";
@@ -13,55 +13,71 @@ const WhoWeAre = () => {
     {
       icon: Lightbulb,
       title: "Innovation First",
-      description: "We embrace emerging technologies and creative thinking to deliver solutions that keep you ahead of the curve."
+      description: "We embrace emerging technologies and creative problem-solving to build solutions that give you a real competitive edge."
     },
     {
       icon: Users,
       title: "True Partnership",
-      description: "Your success is our success. We work alongside you as an extension of your team, not just a vendor."
+      description: "Your success is our success. We integrate with your team, align with your goals, and measure ourselves by your outcomes."
     },
     {
       icon: Award,
       title: "Quality Obsessed",
-      description: "Every line of code, every design pixel, every deliverable meets our rigorous quality standards."
+      description: "Every line of code, every design decision, every deliverable meets rigorous standards—because your reputation depends on it."
     },
     {
       icon: Heart,
       title: "Radical Transparency",
-      description: "No hidden agendas. Clear communication, honest timelines, and straightforward pricing always."
+      description: "No surprises. Clear communication, honest timelines, and straightforward pricing from day one to launch day."
+    }
+  ];
+
+  const pillars = [
+    {
+      icon: Zap,
+      title: "Ship Faster",
+      description: "Agile sprints, pre-built components, and parallel workstreams get you to market weeks ahead of schedule."
     },
     {
-      icon: Target,
-      title: "Outcome Focused",
-      description: "We measure our work by your business results — increased revenue, reduced costs, happier users."
+      icon: Handshake,
+      title: "Partner Deeply",
+      description: "Embedded teams, shared channels, weekly syncs—we become an extension of your organization."
     },
     {
-      icon: Globe,
-      title: "Global Mindset",
-      description: "Diverse perspectives from our worldwide team bring fresh ideas and 24/7 support capabilities."
+      icon: TrendingUp,
+      title: "Scale Confidently",
+      description: "Cloud-native architecture, automated testing, and CI/CD pipelines built for your growth trajectory."
     }
   ];
 
   const leaders = [
     {
       name: "Umair Mansoor",
+      initials: "UM",
       role: "Chief Executive Officer",
-      bio: "Visionary leader driving digital transformation and AI innovation across global markets"
+      bio: "Leads TechLand's vision for AI-driven digital transformation, with 15+ years building products that scale globally.",
+      gradient: "from-primary to-accent"
     },
     {
       name: "Hamza Rashid",
+      initials: "HR",
       role: "Chief Operations Officer",
-      bio: "Operations expert ensuring seamless delivery and operational excellence"
+      bio: "Orchestrates delivery excellence across teams, ensuring every project ships on time without compromising quality.",
+      gradient: "from-accent to-primary"
     },
     {
       name: "Tim Krug",
+      initials: "TK",
       role: "Chief Financial Officer",
-      bio: "Financial strategist optimizing growth and sustainable business performance"
+      bio: "Drives sustainable growth through strategic financial planning and operational efficiency.",
+      gradient: "from-primary/80 to-accent/80"
     },
     {
       name: "Dave Sanders",
+      initials: "DS",
       role: "Chief Business Officer",
-      bio: "Business development leader expanding partnerships and market opportunities"
+      bio: "Builds lasting client partnerships and expands TechLand's reach into new markets and industries.",
+      gradient: "from-accent/80 to-primary/80"
     }
   ];
 
@@ -157,110 +173,105 @@ const WhoWeAre = () => {
 
 
       {/* Mission & Vision */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="animate-slide-up">
-              <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-2 mb-6">
-                <Target className="w-5 h-5 text-primary" />
-                <span className="text-sm font-medium text-primary">Our Mission</span>
+      <section className="py-20 bg-muted/30 relative overflow-hidden">
+        {/* Decorative background orb */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Mission Card - Full Width with Gradient Border */}
+          <div className="relative rounded-3xl bg-gradient-to-br from-primary/20 via-primary/10 to-accent/20 p-[1px] mb-12">
+            <div className="bg-card rounded-3xl p-8 md:p-12">
+              {/* Mission Header */}
+              <div className="text-center mb-10">
+                <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-2 mb-6">
+                  <Target className="w-5 h-5 text-primary" />
+                  <span className="text-sm font-medium text-primary">Our Mission</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 max-w-3xl mx-auto">
+                  We help ambitious businesses <span className="gradient-text">ship great software faster</span>
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Not just code that works—solutions that drive measurable results: more users, more revenue, fewer headaches.
+                </p>
               </div>
-              <h2 className="text-4xl font-bold mb-6">Building Technology That <span className="gradient-text">Drives Results</span></h2>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                We exist to help businesses leverage technology as a competitive advantage. Our mission is to deliver solutions that don't just work — they transform how you operate, compete, and grow.
-              </p>
-              <div className="space-y-4">
-                <div className="flex items-start gap-3 group">
-                  <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center mt-1 group-hover:scale-110 transition-transform">
-                    <Lightbulb className="w-3 h-3 text-white" />
+
+              {/* Three Pillars */}
+              <div className="grid md:grid-cols-3 gap-6">
+                {pillars.map((pillar, index) => (
+                  <div key={index} className="text-center p-6 rounded-2xl bg-muted/50 hover:bg-muted/80 transition-colors group">
+                    <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <pillar.icon className="w-7 h-7 text-white" />
+                    </div>
+                    <h3 className="font-semibold text-lg mb-2">{pillar.title}</h3>
+                    <p className="text-sm text-muted-foreground">{pillar.description}</p>
                   </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Speed to Market</h3>
-                    <p className="text-muted-foreground">Launch faster with our agile development approach and pre-built components</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 group">
-                  <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center mt-1 group-hover:scale-110 transition-transform">
-                    <Heart className="w-3 h-3 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Your Team, Extended</h3>
-                    <p className="text-muted-foreground">We integrate seamlessly with your workflow, culture, and communication style</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 group">
-                  <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center mt-1 group-hover:scale-110 transition-transform">
-                    <Globe className="w-3 h-3 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Built to Scale</h3>
-                    <p className="text-muted-foreground">Architecture designed to grow with your business from day one</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
-            <div className="relative">
-              <div className="relative overflow-hidden rounded-2xl mb-6 group">
-                <img
-                  src={officeCulture}
-                  alt="TechLand office culture and workspace"
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+          </div>
+
+          {/* Vision + Image Row */}
+          <div className="grid lg:grid-cols-5 gap-8 items-stretch">
+            {/* Vision Card - 2/5 width */}
+            <Card className="lg:col-span-2 p-8 bg-gradient-to-br from-primary/5 to-accent/10 border-primary/20 flex flex-col justify-center">
+              <div className="w-14 h-14 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center mb-6">
+                <Award className="w-7 h-7 text-white" />
               </div>
-              <Card className="p-8 bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 -mt-16 relative z-10 hover:shadow-lg transition-shadow duration-300">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Award className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
-                  <p className="text-muted-foreground">
-                    To be the go-to technology partner for growth-focused businesses — recognized for turning ambitious ideas into products that users love and markets embrace.
-                  </p>
-                </div>
-              </Card>
+              <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                To become the technology partner that growth-focused companies trust to turn bold ideas into products users love—on time, on budget, and built to scale.
+              </p>
+            </Card>
+
+            {/* Image - 3/5 width */}
+            <div className="lg:col-span-3 relative rounded-2xl overflow-hidden group min-h-[280px]">
+              <img
+                src={officeCulture}
+                alt="TechLand team collaborating in modern workspace"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent"></div>
+              <div className="absolute bottom-6 left-6 right-6">
+                <p className="text-white/90 text-sm font-medium">Building the future, one sprint at a time</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Values Section */}
-      <section className="py-20 relative overflow-hidden">
-        {/* Gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background"></div>
-
+      <section className="py-24 relative overflow-hidden">
         {/* Decorative elements */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
 
         <div className="container mx-auto px-4 relative z-10">
           {/* Header */}
-          <div className="text-center mb-14 animate-slide-up">
+          <div className="text-center mb-16 animate-slide-up">
             <Badge className="mb-4">Our Values</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">What <span className="gradient-text">Drives Us</span> Forward</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              The principles that guide every project, every decision, and every relationship we build
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">What <span className="gradient-text">Drives Us</span></h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              Four principles that guide every project and relationship
             </p>
           </div>
 
-          {/* Values Grid - 2 rows of 3 */}
-          <div className="max-w-5xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-6">
+          {/* Values Grid - 2x2 */}
+          <div className="max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8">
               {values.map((value, index) => (
-                <div
+                <Card
                   key={index}
-                  className="group p-6 rounded-2xl bg-card/50 border border-border/50 hover:border-primary/30 hover:bg-card/80 transition-all duration-300"
+                  className="group p-8 hover:shadow-xl hover:border-primary/30 transition-all duration-300"
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                      <value.icon className="w-5 h-5 text-white" />
+                  <div className="flex items-start gap-5">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <value.icon className="w-7 h-7 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-1.5 text-foreground">{value.title}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{value.description}</p>
+                      <h3 className="font-semibold text-xl mb-2">{value.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed">{value.description}</p>
                     </div>
                   </div>
-                </div>
+                </Card>
               ))}
             </div>
           </div>
@@ -295,8 +306,8 @@ const WhoWeAre = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             {leaders.map((leader, index) => (
               <Card key={index} className="p-6 text-center hover:shadow-xl transition-all duration-300 group hover:-translate-y-2">
-                <div className="w-24 h-24 mx-auto mb-5 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center ring-4 ring-primary/10 group-hover:ring-primary/30 transition-all duration-300">
-                  <User className="w-10 h-10 text-primary/60 group-hover:text-primary transition-colors duration-300" />
+                <div className={`w-20 h-20 mx-auto mb-5 rounded-full bg-gradient-to-br ${leader.gradient} flex items-center justify-center ring-4 ring-primary/10 group-hover:ring-primary/30 transition-all duration-300`}>
+                  <span className="text-2xl font-bold text-white">{leader.initials}</span>
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{leader.name}</h3>
                 <Badge variant="outline" className="mb-3 text-xs">{leader.role}</Badge>
