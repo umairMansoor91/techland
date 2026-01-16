@@ -37,6 +37,9 @@ Thumbs.db
 htmlcov/
 .pytest_cache/
 
+# Credentials
+ADMIN_CREDENTIALS.txt
+
 # Build
 build/
 *.egg-info/

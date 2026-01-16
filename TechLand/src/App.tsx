@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import BlogAIFuture from "./pages/BlogAIFuture";
 import BlogCloudComputing from "./pages/BlogCloudComputing";
 import BlogCybersecurity from "./pages/BlogCybersecurity";
+import BlogAgenticAI from "./pages/BlogAgenticAI";
 import CaseStudyEcommerce from "./pages/CaseStudyEcommerce";
 import CaseStudyHealthcare from "./pages/CaseStudyHealthcare";
 import CaseStudyVersatileSolutions from "./pages/CaseStudyVersatileSolutions";
@@ -47,6 +48,7 @@ const App = () => (
           <Route path="/blog/ai-future" element={<BlogAIFuture />} />
           <Route path="/blog/cloud-computing" element={<BlogCloudComputing />} />
           <Route path="/blog/cybersecurity" element={<BlogCybersecurity />} />
+          <Route path="/blog/agentic-ai" element={<BlogAgenticAI />} />
           <Route path="/case-study/ecommerce" element={<CaseStudyEcommerce />} />
           <Route path="/case-study/healthcare" element={<CaseStudyHealthcare />} />
           <Route path="/case-study/versatile-solutions" element={<CaseStudyVersatileSolutions />} />

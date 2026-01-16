@@ -33,11 +33,11 @@ const insights = [
   },
   {
     type: "Blog",
-    title: "The Future of AI in Enterprise Applications",
-    description: "Trends and opportunities in artificial intelligence for business transformation",
+    title: "Agentic AI: From Pilots to Production in 2026",
+    description: "How enterprises are moving from AI experimentation to real-world deployment",
     image: blogAiFuture,
-    category: "Artificial Intelligence",
-    link: "/blog/ai-future"
+    category: "Agentic AI",
+    link: "/blog/agentic-ai"
   },
   {
     type: "Blog",

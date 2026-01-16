@@ -29,6 +29,14 @@ interface Article {
 
 const articles: Article[] = [
   {
+    title: "Agentic AI: From Pilots to Production in 2026",
+    description: "How enterprises are moving from AI experimentation to real-world deployment, and what it takes to succeed in the 60% that delivers results.",
+    image: blogAIFuture,
+    link: "/blog/agentic-ai",
+    category: "Blog",
+    readTime: "8 min read"
+  },
+  {
     title: "TRAMERICAA: Scaling an Amazon Business with Smart Analytics",
     description: "How we built an Amazon analytics and automation platform to streamline operations and drive growth.",
     image: caseStudyTramericaa,
