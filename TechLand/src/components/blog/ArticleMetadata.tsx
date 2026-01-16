@@ -43,7 +43,7 @@ const ArticleMetadata = ({
       "name": "TechLand",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://techland.ai/logo.png"
+        "url": "https://techland.ai/favicon.png"
       }
     },
     "mainEntityOfPage": {
@@ -66,7 +66,7 @@ const ArticleMetadata = ({
       <meta property="og:image" content={image} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:type" content="article" />
-      <meta property="og:site_name" content="Mind Tech AI" />
+      <meta property="og:site_name" content="TechLand" />
       
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
