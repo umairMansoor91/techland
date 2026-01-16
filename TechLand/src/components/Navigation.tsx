@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown, Cpu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,10 +56,10 @@ const Navigation = () => {
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <a href="/" className="flex items-center space-x-2 transition-all duration-200 hover:scale-105">
-              <Cpu 
-                className={`h-8 w-8 transition-colors ${
-                  isScrolled ? 'text-primary' : 'text-white'
-                }`}
+              <img
+                src="/favicon.png"
+                alt="TechLand Logo"
+                className="h-8 w-8"
               />
               <span className={`text-xl font-bold transition-colors ${
                 isScrolled ? 'gradient-text' : 'text-white'
