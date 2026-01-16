@@ -6,23 +6,23 @@ const ResourceAugmentation = () => {
   const verificationSteps = [
     {
       step: "01",
-      title: "English & Aptitude Test",
-      description: "Communication skills and cognitive ability assessment"
+      title: "Foundational Screening",
+      description: "Academic grounding, fundamentals, communication assessment"
     },
     {
       step: "02",
-      title: "Basic Algorithms",
-      description: "Fundamental programming and problem-solving evaluation"
+      title: "Technical Depth Assessment",
+      description: "Real problem solving, code quality, system thinking evaluation"
     },
     {
       step: "03",
-      title: "Advanced Algorithms",
-      description: "Complex data structures and optimization challenges"
+      title: "Practical Delivery Evaluation",
+      description: "Short paid task or sprint-level simulation"
     },
     {
       step: "04",
-      title: "Capstone Project",
-      description: "Real-world project demonstrating practical expertise"
+      title: "Institutional Fit Review",
+      description: "Ownership mindset, documentation, collaboration standards"
     }
   ];
 
@@ -53,7 +53,7 @@ const ResourceAugmentation = () => {
               Scale Your Team
             </span>
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Resource <span className="gradient-text">Augmentation</span>
+              Staff <span className="gradient-text">Augmentation</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Get qualified and vetted talent to accelerate your projects with engineers who integrate seamlessly into your team.
