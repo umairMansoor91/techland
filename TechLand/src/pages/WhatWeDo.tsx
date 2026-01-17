@@ -177,9 +177,9 @@ const WhatWeDo = () => {
 
                 {/* Hover State - Full Description */}
                 <div className="absolute inset-0 bg-white/95 backdrop-blur-sm flex flex-col justify-center items-center p-8 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  <h3 className="text-foreground text-2xl font-bold mb-4 leading-tight">{service.title}</h3>
+                  <h3 className="text-black text-2xl font-bold mb-4 leading-tight">{service.title}</h3>
                   <div className="w-12 h-1 bg-primary rounded-full mb-4"></div>
-                  <p className="text-muted-foreground text-base leading-relaxed">{service.description}</p>
+                  <p className="text-gray-600 text-base leading-relaxed">{service.description}</p>
                 </div>
               </div>
             ))}
