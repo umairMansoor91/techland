@@ -1,487 +1,316 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
+import CTASection from "@/components/CTASection";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Brain, 
-  Smartphone, 
-  Cloud, 
-  Shield, 
-  Zap, 
-  Code, 
-  Database, 
-  Cpu,
-  ArrowRight,
-  CheckCircle
+import {
+  Code2,
+  Shield,
+  CheckCircle2,
+  Rocket,
+  Zap
 } from "lucide-react";
-import { Users, Award, Star, Lightbulb, Globe, Target, TrendingUp, Heart } from "lucide-react";
-import heroTech from "@/assets/hero-tech.jpg";
-import whatWeDoHero from "@/assets/what-we-do-hero.jpg";
-import blogAIFuture from "@/assets/blog-ai-future.jpg";
-import blogCloudComputing from "@/assets/blog-cloud-computing.jpg";
-import blogCybersecurity from "@/assets/blog-cybersecurity.jpg";
-import officeCulture from "@/assets/office-culture.jpg";
-import teamCollaboration from "@/assets/team-collaboration.jpg";
 
 const WhatWeDo = () => {
+
   return (
     <div className="min-h-screen">
       <Navigation />
-      
-      {/* Hero Section */}
-      <section className="relative pt-20 pb-32 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src={whatWeDoHero} 
-            alt="TechLand advanced technology solutions and development environment" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/70 to-background/90"></div>
-        </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-6 bg-white/10 backdrop-blur-sm text-white border-white/20">What We Do</Badge>
-            <h1 className="text-5xl lg:text-6xl font-bold text-white mb-8">
-              Transforming Ideas Into Digital Reality
-            </h1>
-            <p className="text-xl text-white/80 mb-12 leading-relaxed">
-              We deliver comprehensive technology solutions that drive innovation, enhance efficiency, and accelerate growth across industries.
-            </p>
-          </div>
-        </div>
-      </section>
 
-      {/* Our Expertise & Philosophy */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-2 mb-6">
-                <Target className="w-5 h-5 text-primary" />
-                <span className="text-sm font-medium text-primary">Our Expertise</span>
-              </div>
-              <h2 className="text-4xl font-bold mb-6">Leading-Edge Technology Solutions</h2>
+      {/* Hero Section */}
+      <section className="relative pt-28 pb-20 overflow-hidden">
+        {/* Background with gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5"></div>
+
+        {/* Animated background elements */}
+        <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-1/3 left-1/6 w-56 h-56 bg-accent/10 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }}></div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left Content */}
+            <div className="animate-slide-up">
+              <Badge className="mb-6">What We Do</Badge>
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                Building <span className="gradient-text">Digital Solutions</span> That Scale
+              </h1>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                With over a decade of experience in cutting-edge technology implementation, we specialize in transforming complex business challenges into elegant digital solutions. Our expertise spans from artificial intelligence to enterprise-grade applications.
+                From web and mobile development to AI, blockchain, and cloud infrastructure—we deliver
+                end-to-end technology services that help businesses innovate and grow.
               </p>
+
+              {/* Key Highlights */}
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center mt-1">
-                    <Brain className="w-3 h-3 text-white" />
+                  <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Rocket className="w-4 h-4 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">AI-First Approach</h3>
-                    <p className="text-muted-foreground">Integrating intelligent automation into every solution</p>
+                    <span className="font-medium">Full-Stack Expertise</span>
+                    <span className="text-muted-foreground"> — Web, mobile, cloud, and emerging tech under one roof.</span>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center mt-1">
-                    <Globe className="w-3 h-3 text-white" />
+                  <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Zap className="w-4 h-4 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">Scalable Architecture</h3>
-                    <p className="text-muted-foreground">Building solutions that grow with your business</p>
+                    <span className="font-medium">Rapid Delivery</span>
+                    <span className="text-muted-foreground"> — Agile processes that get you to market faster.</span>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center mt-1">
-                    <Shield className="w-3 h-3 text-white" />
+                  <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Shield className="w-4 h-4 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">Security-First Design</h3>
-                    <p className="text-muted-foreground">Enterprise-grade security in every implementation</p>
+                    <span className="font-medium">Enterprise Quality</span>
+                    <span className="text-muted-foreground"> — Security, scalability, and reliability built in.</span>
                   </div>
                 </div>
               </div>
             </div>
+
+            {/* Right Visual */}
             <div className="relative">
-              <div className="relative overflow-hidden rounded-2xl mb-6">
-                <img 
-                  src={teamCollaboration} 
-                  alt="TechLand team collaborating on innovative solutions" 
-                  className="w-full h-64 object-cover"
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"
+                  alt="TechLand team building innovative digital solutions"
+                  className="w-full h-[400px] lg:h-[500px] object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent"></div>
               </div>
-              <Card className="p-8 bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 -mt-16 relative z-10">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Lightbulb className="w-8 h-8 text-white" />
+
+              {/* Floating Stats Card */}
+              <Card className="absolute -bottom-6 -left-6 p-5 bg-card/95 backdrop-blur-sm border-primary/20 shadow-xl">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                    <Code2 className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-4">Innovation Philosophy</h3>
-                  <p className="text-muted-foreground">
-                    We believe technology should amplify human potential. Every solution we create is designed to unlock new possibilities and drive meaningful business transformation.
-                  </p>
+                  <div>
+                    <div className="text-2xl font-bold">7+</div>
+                    <div className="text-sm text-muted-foreground">Service Categories</div>
+                  </div>
                 </div>
               </Card>
+
+              {/* Floating Badge */}
+              <div className="absolute -top-4 -right-4 bg-gradient-to-br from-primary to-accent text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg">
+                25+ Services
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Success Metrics */}
+      {/* Services Overview */}
       <section className="py-20 bg-muted/30 relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src={officeCulture} 
-            alt="Professional achievements and success metrics" 
-            className="w-full h-full object-cover opacity-20"
-          />
-        </div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
-            <Badge className="mb-4">Our Impact</Badge>
-            <h2 className="text-4xl font-bold mb-6">Delivering Measurable Results</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Our solutions drive real business value with proven outcomes across all industries
+            <Badge className="mb-4">Our Services</Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Driving <span className="gradient-text">Business Transformation</span>
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              End-to-end solutions that empower businesses to innovate, scale, and succeed in the digital age
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            {[
-              {
-                metric: "300+",
-                label: "Projects Delivered",
-                description: "Successful implementations worldwide"
-              },
-              {
-                metric: "92%",
-                label: "Cost Reduction",
-                description: "Average operational savings achieved"
-              },
-              {
-                metric: "18x",
-                label: "Performance Boost",
-                description: "Average system performance improvement"
-              },
-              {
-                metric: "99.9%",
-                label: "Uptime Achieved",
-                description: "Reliability across all deployments"
-              }
-            ].map((stat, index) => (
-              <Card key={index} className="p-6 text-center hover:shadow-elegant transition-all duration-300 bg-background/95 backdrop-blur-sm">
-                <div className="mb-4">
-                  <div className="text-4xl font-bold text-primary mb-2">{stat.metric}</div>
-                  <div className="font-semibold mb-2">{stat.label}</div>
-                  <div className="text-sm text-muted-foreground">{stat.description}</div>
-                </div>
-              </Card>
-            ))}
-          </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {[
               {
-                icon: Award,
-                title: "Industry Recognition",
-                description: "Certified partners with leading technology providers and award-winning solutions."
-              },
-              {
-                icon: Users,
-                title: "Expert Team",
-                description: "70+ certified professionals with deep expertise across all technology domains."
-              },
-              {
-                icon: Heart,
-                title: "Client Success",
-                description: "95% client retention rate with long-term partnerships spanning multiple projects."
-              }
-            ].map((achievement, index) => (
-              <Card key={index} className="p-6 hover:shadow-elegant transition-all duration-300 group bg-background/95 backdrop-blur-sm">
-                <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-glow rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <achievement.icon className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">{achievement.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{achievement.description}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Core Services */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <Badge className="mb-4">Core Services</Badge>
-            <h2 className="text-4xl font-bold mb-6">Comprehensive Technology Solutions</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              From AI implementation to digital transformation, we provide end-to-end solutions tailored to your business needs
-            </p>
-          </div>
-          
-          <div className="grid lg:grid-cols-2 gap-8">
-            {[
-              {
-                icon: Brain,
-                title: "AI & Machine Learning",
-                description: "Custom AI solutions including predictive analytics, natural language processing, computer vision, and intelligent automation systems.",
-                features: ["Custom AI Models", "Predictive Analytics", "NLP Solutions", "Computer Vision"],
-                image: blogAIFuture
-              },
-              {
-                icon: Smartphone,
                 title: "Digital Transformation",
-                description: "End-to-end digital transformation services to modernize your business processes and enhance customer experiences.",
-                features: ["Process Automation", "Digital Strategy", "Legacy Modernization", "Change Management"],
-                image: officeCulture
+                description: "Navigate the digital landscape with expert consulting. We guide businesses in leveraging AI, IoT, and emerging technologies to drive efficiency and growth.",
+                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=600&fit=crop"
               },
               {
-                icon: Code,
-                title: "Custom Software Development",
-                description: "Bespoke software solutions built with cutting-edge technologies to meet your unique business requirements.",
-                features: ["Web Applications", "Mobile Apps", "Enterprise Software", "API Development"],
-                image: teamCollaboration
+                title: "Customer Experience",
+                description: "Craft memorable experiences through personalized, data-driven engagement. Our omnichannel platforms connect brands with customers seamlessly across all touchpoints.",
+                image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=600&fit=crop"
               },
               {
-                icon: Cloud,
-                title: "Cloud Solutions",
-                description: "Cloud migration, optimization, and management services to enhance scalability, security, and cost-efficiency.",
-                features: ["Cloud Migration", "Infrastructure Optimization", "Multi-cloud Strategy", "DevOps Integration"],
-                image: blogCloudComputing
+                title: "E-commerce & Mobile",
+                description: "Empower your brand with robust e-commerce and mobile platforms. Our solutions enhance online presence, drive sales, and deliver exceptional user experiences.",
+                image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=600&fit=crop"
               },
               {
-                icon: Database,
-                title: "Data Analytics & BI",
-                description: "Transform raw data into actionable insights with advanced analytics, reporting, and business intelligence solutions.",
-                features: ["Data Warehousing", "Real-time Analytics", "Business Intelligence", "Data Visualization"],
-                image: heroTech
+                title: "Data Analytics",
+                description: "Harness the power of data with advanced analytics. From real-time analysis to customer segmentation, our solutions help you understand behaviors and drive results.",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=600&fit=crop"
               },
               {
-                icon: Shield,
-                title: "Cybersecurity",
-                description: "Comprehensive security solutions to protect your digital assets and ensure compliance with industry standards.",
-                features: ["Security Assessment", "Threat Detection", "Compliance Management", "Incident Response"],
-                image: blogCybersecurity
+                title: "Supply Chain",
+                description: "Optimize every step of your supply chain. We provide solutions for inventory management, demand forecasting, and logistics tracking for maximum efficiency.",
+                image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=600&fit=crop"
+              },
+              {
+                title: "AI & Machine Learning",
+                description: "Transform your business with AI-driven insights. Our solutions automate tasks, improve efficiencies, and predict trends in customer behavior.",
+                image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=600&fit=crop"
+              },
+              {
+                title: "Sustainability",
+                description: "Meet the growing demand for sustainable practices. We help brands integrate responsible sourcing, reduce waste, and adopt eco-friendly solutions.",
+                image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&h=600&fit=crop"
               }
             ].map((service, index) => (
-              <Card key={index} className="overflow-hidden hover:shadow-elegant transition-all duration-300 group">
-                <div className="relative h-48 overflow-hidden">
-                  <img 
-                    src={service.image} 
-                    alt={`${service.title} illustration`}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent"></div>
-                  <div className="absolute bottom-4 left-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-glow rounded-xl flex items-center justify-center">
-                      <service.icon className="w-6 h-6 text-white" />
-                    </div>
+              <div
+                key={index}
+                className="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-300"
+              >
+                {/* Background Image */}
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+
+                {/* Default State - Title Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 group-hover:opacity-0">
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <h3 className="text-white text-xl font-semibold">{service.title}</h3>
                   </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
-                  <p className="text-muted-foreground mb-6 leading-relaxed">{service.description}</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {service.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-primary" />
-                        <span className="text-sm text-muted-foreground">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
+
+                {/* Hover State - Full Description */}
+                <div className="absolute inset-0 bg-white/95 backdrop-blur-sm flex flex-col justify-center items-center p-8 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                  <h3 className="text-foreground text-2xl font-bold mb-4 leading-tight">{service.title}</h3>
+                  <div className="w-12 h-1 bg-primary rounded-full mb-4"></div>
+                  <p className="text-muted-foreground text-base leading-relaxed">{service.description}</p>
                 </div>
-              </Card>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Client Testimonials */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <Badge className="mb-4">Client Success Stories</Badge>
-            <h2 className="text-4xl font-bold mb-6">Transforming Businesses Worldwide</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Hear from industry leaders who have achieved remarkable results with our technology solutions
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {[
-              {
-                quote: "TechLand's custom AI solution increased our operational efficiency by 75% and reduced processing time from hours to minutes.",
-                author: "Jennifer Chen",
-                role: "CTO, TechCorp Industries",
-                industry: "Manufacturing",
-                rating: 5
-              },
-              {
-                quote: "Their cloud migration strategy saved us $2M annually while improving our system performance by 300%. Outstanding execution.",
-                author: "Marcus Rodriguez",
-                role: "IT Director, GlobalFinance",
-                industry: "Financial Services", 
-                rating: 5
-              },
-              {
-                quote: "The AI-powered analytics platform they built gave us insights we never had before, directly contributing to 40% revenue growth.",
-                author: "Dr. Sarah Williams",
-                role: "Head of Innovation, HealthTech Solutions",
-                industry: "Healthcare",
-                rating: 5
-              }
-            ].map((testimonial, index) => (
-              <Card key={index} className="p-6 hover:shadow-elegant transition-all duration-300">
-                <div className="mb-4">
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-primary text-primary" />
-                    ))}
+      {/* Why Choose Us */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left Content */}
+            <div>
+              <Badge className="mb-4">Why TechLand</Badge>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                Technology That <span className="gradient-text">Delivers Results</span>
+              </h2>
+              <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
+                We combine technical excellence with business understanding to build solutions that make a real impact.
+              </p>
+
+              <div className="space-y-6">
+                {[
+                  {
+                    title: "End-to-End Delivery",
+                    description: "From initial concept to deployment and beyond—we handle the entire product lifecycle."
+                  },
+                  {
+                    title: "Modern Tech Stack",
+                    description: "We use cutting-edge technologies and best practices to build scalable, maintainable solutions."
+                  },
+                  {
+                    title: "Agile & Transparent",
+                    description: "Regular updates, clear communication, and iterative delivery so you're always in the loop."
+                  },
+                  {
+                    title: "Domain Expertise",
+                    description: "Deep experience across industries including fintech, healthcare, e-commerce, and more."
+                  }
+                ].map((item, index) => (
+                  <div key={index} className="flex items-start gap-4 group">
+                    <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <CheckCircle2 className="w-4 h-4 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-1 group-hover:text-primary transition-colors">{item.title}</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
+                    </div>
                   </div>
-                  <p className="text-muted-foreground italic leading-relaxed">"{testimonial.quote}"</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/30 rounded-full flex items-center justify-center">
-                    <Users className="w-6 h-6 text-primary" />
+                ))}
+              </div>
+            </div>
+
+            {/* Right Visual */}
+            <div className="relative">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"
+                  alt="TechLand team working on innovative solutions"
+                  className="w-full h-[400px] lg:h-[500px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent"></div>
+              </div>
+
+              {/* Floating Stats Cards */}
+              <div className="absolute -bottom-6 -left-6 bg-card/95 backdrop-blur-sm border border-primary/20 rounded-xl p-5 shadow-xl">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                    <Code2 className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <div className="font-semibold">{testimonial.author}</div>
-                    <div className="text-sm text-muted-foreground">{testimonial.role}</div>
-                    <Badge variant="outline" className="text-xs mt-1">{testimonial.industry}</Badge>
+                    <div className="text-2xl font-bold">100+</div>
+                    <div className="text-sm text-muted-foreground">Projects Delivered</div>
                   </div>
                 </div>
-              </Card>
-            ))}
+              </div>
+
+              <div className="absolute -top-4 -right-4 bg-gradient-to-br from-primary to-accent text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg">
+                Full Stack Expertise
+              </div>
+
+              {/* Floating accent */}
+              <div className="absolute -top-8 -left-8 w-24 h-24 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-2xl"></div>
+              <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-gradient-to-br from-accent/20 to-primary/20 rounded-full blur-2xl"></div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Technology Stack */}
+      {/* Industries */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <Badge className="mb-4">Technology Stack</Badge>
-            <h2 className="text-4xl font-bold mb-6">Cutting-Edge Technologies</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              We leverage the latest technologies and frameworks to deliver robust, scalable, and future-ready solutions
+          <div className="text-center mb-12">
+            <Badge className="mb-4">Industries</Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Serving <span className="gradient-text">Diverse Sectors</span>
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Our solutions power businesses across multiple industries
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                category: "AI & ML",
-                technologies: ["TensorFlow", "PyTorch", "OpenAI GPT", "Hugging Face", "MLflow"]
-              },
-              {
-                category: "Frontend",
-                technologies: ["React", "Vue.js", "Angular", "Next.js", "TypeScript"]
-              },
-              {
-                category: "Backend",
-                technologies: ["Node.js", "Python", "Java", "Go", "Microservices"]
-              },
-              {
-                category: "Cloud & DevOps",
-                technologies: ["AWS", "Azure", "GCP", "Docker", "Kubernetes"]
-              }
-            ].map((stack, index) => (
-              <Card key={index} className="p-6 hover:shadow-elegant transition-all duration-300">
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/30 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Cpu className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-lg font-semibold mb-4">{stack.category}</h3>
-                  <div className="space-y-2">
-                    {stack.technologies.map((tech, idx) => (
-                      <Badge key={idx} variant="outline" className="text-xs">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Process Overview */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src={officeCulture} 
-            alt="Professional work environment and processes" 
-            className="w-full h-full object-cover opacity-20"
-          />
-        </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16">
-            <Badge className="mb-4">Our Process</Badge>
-            <h2 className="text-4xl font-bold mb-6">How We Work</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Our proven methodology ensures successful project delivery from concept to deployment
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
             {[
-              {
-                step: "01",
-                title: "Discovery & Strategy",
-                description: "Deep dive into your business needs, challenges, and goals to create a comprehensive strategy."
-              },
-              {
-                step: "02",
-                title: "Design & Planning",
-                description: "Create detailed technical specifications, architecture designs, and project roadmaps."
-              },
-              {
-                step: "03",
-                title: "Development & Testing",
-                description: "Agile development with continuous testing, quality assurance, and iterative improvements."
-              },
-              {
-                step: "04",
-                title: "Deployment & Support",
-                description: "Seamless deployment with ongoing support, monitoring, and optimization services."
-              }
-            ].map((process, index) => (
-              <div key={index} className="relative">
-                <Card className="p-6 h-full hover:shadow-elegant transition-all duration-300 group bg-background/95 backdrop-blur-sm">
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary-glow rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                      <span className="text-white font-bold text-lg">{process.step}</span>
-                    </div>
-                    <h3 className="text-xl font-semibold mb-3">{process.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{process.description}</p>
-                  </div>
-                </Card>
-                {index < 3 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2">
-                    <ArrowRight className="w-6 h-6 text-primary" />
-                  </div>
-                )}
-              </div>
+              "Fintech & Banking",
+              "Healthcare",
+              "E-commerce & Retail",
+              "Travel & Hospitality",
+              "Telecommunications",
+              "Public Sector",
+              "Oil, Gas & Energy",
+              "Startups & SaaS",
+              "Manufacturing",
+              "Education"
+            ].map((industry) => (
+              <Badge
+                key={industry}
+                variant="outline"
+                className="text-sm px-5 py-2 hover:bg-primary/10 transition-colors cursor-default"
+              >
+                {industry}
+              </Badge>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary/10 to-primary-glow/10">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold mb-6">Ready to Transform Your Business?</h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Let's discuss how our innovative solutions can drive your digital transformation journey
-            </p>
-            <div className="flex justify-center">
-              <Button 
-                size="lg" 
-                className="px-8"
-                onClick={() => window.location.href = '/lets-talk-business'}
-              >
-                <Zap className="w-5 h-5 mr-2" />
-                Start Your Project
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <CTASection />
 
       <Footer />
     </div>
