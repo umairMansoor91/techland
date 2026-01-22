@@ -2,6 +2,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.throttling import AnonRateThrottle
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from drf_spectacular.utils import extend_schema
 
 from .serializers import (
@@ -25,8 +26,10 @@ class DeveloperApplicationCreateView(APIView):
     - Honeypot spam protection
     - reCAPTCHA v3 verification
     - Data stored in database (viewable in Django admin)
+    - File upload support for resumes (PDF only, max 5MB)
     """
     throttle_classes = [ApplicationRateThrottle]
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
 
     @extend_schema(
         request=DeveloperApplicationSerializer,
