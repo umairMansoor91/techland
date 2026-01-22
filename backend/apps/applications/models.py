@@ -1,4 +1,15 @@
+import os
 from django.db import models
+from django.core.validators import FileExtensionValidator
+
+
+def resume_upload_path(instance, filename):
+    """Generate upload path for resumes: resumes/YYYY/MM/email_filename"""
+    from django.utils import timezone
+    now = timezone.now()
+    # Sanitize email for folder name
+    email_folder = instance.email.replace('@', '_at_').replace('.', '_')
+    return f'resumes/{now.year}/{now.month:02d}/{email_folder}/{filename}'
 
 
 class DeveloperApplication(models.Model):
@@ -52,7 +63,6 @@ class DeveloperApplication(models.Model):
     full_name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=30)
-    country = models.CharField(max_length=100)
     years_of_experience = models.PositiveIntegerField()
 
     # Position Details
@@ -60,7 +70,6 @@ class DeveloperApplication(models.Model):
     work_mode = models.CharField(max_length=20, choices=WORK_MODE_CHOICES)
     available_from = models.DateField()
     notice_period = models.CharField(max_length=50, blank=True, null=True)
-    salary_expectation = models.CharField(max_length=100, blank=True, null=True)
 
     # Technical Skills
     primary_skills = models.TextField(help_text='Comma-separated list of primary skills')
@@ -71,6 +80,15 @@ class DeveloperApplication(models.Model):
     portfolio_url = models.URLField(blank=True, null=True)
     github_url = models.URLField(blank=True, null=True)
     linkedin_url = models.URLField(blank=True, null=True)
+
+    # Resume (PDF only)
+    resume = models.FileField(
+        upload_to=resume_upload_path,
+        validators=[FileExtensionValidator(allowed_extensions=['pdf'])],
+        help_text='PDF resume (max 5MB)',
+        blank=True,
+        null=True
+    )
 
     # Additional Information
     english_proficiency = models.CharField(

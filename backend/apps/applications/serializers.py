@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.conf import settings
 from apps.core.spam_protection import HoneypotMixin, RecaptchaMixin
 from .models import DeveloperApplication
 
@@ -17,14 +18,12 @@ class DeveloperApplicationSerializer(HoneypotMixin, RecaptchaMixin, serializers.
             'full_name',
             'email',
             'phone',
-            'country',
             'years_of_experience',
             # Position
             'position',
             'work_mode',
             'available_from',
             'notice_period',
-            'salary_expectation',
             # Skills
             'primary_skills',
             'programming_languages',
@@ -33,6 +32,8 @@ class DeveloperApplicationSerializer(HoneypotMixin, RecaptchaMixin, serializers.
             'portfolio_url',
             'github_url',
             'linkedin_url',
+            # Resume
+            'resume',
             # Additional
             'english_proficiency',
             'cover_letter',
@@ -43,12 +44,26 @@ class DeveloperApplicationSerializer(HoneypotMixin, RecaptchaMixin, serializers.
         ]
         extra_kwargs = {
             'notice_period': {'required': False},
-            'salary_expectation': {'required': False},
             'portfolio_url': {'required': False},
             'github_url': {'required': False},
             'linkedin_url': {'required': False},
             'cover_letter': {'required': False},
+            'resume': {'required': False},
         }
+
+    def validate_resume(self, value):
+        """Validate resume is a PDF and within size limit."""
+        if value:
+            # Check file extension
+            if not value.name.lower().endswith('.pdf'):
+                raise serializers.ValidationError('Only PDF files are allowed.')
+            # Check file size (5MB max)
+            max_size = getattr(settings, 'MAX_RESUME_SIZE', 5 * 1024 * 1024)
+            if value.size > max_size:
+                raise serializers.ValidationError(
+                    f'Resume file size must be less than {max_size // (1024 * 1024)}MB.'
+                )
+        return value
 
     def validate_email(self, value):
         """Validate email format and check for disposable emails."""

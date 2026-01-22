@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -23,7 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card } from "@/components/ui/card";
-import { Loader2, CheckCircle2, Send } from "lucide-react";
+import { Loader2, CheckCircle2, Send, Upload, X, FileText } from "lucide-react";
 import {
   submitDeveloperApplication,
   POSITION_OPTIONS,
@@ -31,17 +31,17 @@ import {
   ENGLISH_PROFICIENCY_OPTIONS,
 } from "@/lib/api";
 
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+
 const formSchema = z.object({
   full_name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email"),
   phone: z.string().min(6, "Please enter a valid phone number"),
-  country: z.string().min(2, "Country is required"),
   years_of_experience: z.coerce.number().min(0, "Required").max(50, "Please enter a valid number"),
   position: z.string().min(1, "Please select a position"),
   work_mode: z.string().min(1, "Please select work mode"),
   available_from: z.string().min(1, "Please select availability date"),
   notice_period: z.string().optional(),
-  salary_expectation: z.string().optional(),
   primary_skills: z.string().min(5, "Please list your primary skills"),
   programming_languages: z.string().min(2, "Please list programming languages"),
   frameworks: z.string().min(2, "Please list frameworks/tools"),
@@ -64,6 +64,9 @@ export default function DeveloperApplicationForm({ preselectedPosition }: Develo
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [resumeError, setResumeError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -71,13 +74,11 @@ export default function DeveloperApplicationForm({ preselectedPosition }: Develo
       full_name: "",
       email: "",
       phone: "",
-      country: "",
       years_of_experience: 0,
       position: preselectedPosition || "",
       work_mode: "",
       available_from: "",
       notice_period: "",
-      salary_expectation: "",
       primary_skills: "",
       programming_languages: "",
       frameworks: "",
@@ -91,6 +92,40 @@ export default function DeveloperApplicationForm({ preselectedPosition }: Develo
     },
   });
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    setResumeError(null);
+
+    if (!file) {
+      setResumeFile(null);
+      return;
+    }
+
+    // Validate file type
+    if (!file.name.toLowerCase().endsWith('.pdf')) {
+      setResumeError('Only PDF files are allowed');
+      setResumeFile(null);
+      return;
+    }
+
+    // Validate file size
+    if (file.size > MAX_FILE_SIZE) {
+      setResumeError('File size must be less than 5MB');
+      setResumeFile(null);
+      return;
+    }
+
+    setResumeFile(file);
+  };
+
+  const removeFile = () => {
+    setResumeFile(null);
+    setResumeError(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
   async function onSubmit(data: FormData) {
     if (data.honeypot) return;
 
@@ -99,11 +134,28 @@ export default function DeveloperApplicationForm({ preselectedPosition }: Develo
 
     try {
       await submitDeveloperApplication({
-        ...data,
+        full_name: data.full_name,
+        email: data.email,
+        phone: data.phone,
         years_of_experience: Number(data.years_of_experience),
+        position: data.position,
+        work_mode: data.work_mode,
+        available_from: data.available_from,
+        notice_period: data.notice_period,
+        primary_skills: data.primary_skills,
+        programming_languages: data.programming_languages,
+        frameworks: data.frameworks,
+        portfolio_url: data.portfolio_url,
+        github_url: data.github_url,
+        linkedin_url: data.linkedin_url,
+        english_proficiency: data.english_proficiency,
+        cover_letter: data.cover_letter,
+        willing_to_relocate: data.willing_to_relocate,
+        resume: resumeFile || undefined,
       });
       setIsSuccess(true);
       form.reset();
+      setResumeFile(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to submit application. Please try again.");
     } finally {
@@ -182,7 +234,7 @@ export default function DeveloperApplicationForm({ preselectedPosition }: Develo
               />
             </div>
 
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="phone"
@@ -191,20 +243,6 @@ export default function DeveloperApplicationForm({ preselectedPosition }: Develo
                     <FormLabel>Phone *</FormLabel>
                     <FormControl>
                       <Input placeholder="+1 234 567 890" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="country"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Country *</FormLabel>
-                    <FormControl>
-                      <Input placeholder="United States" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -283,7 +321,7 @@ export default function DeveloperApplicationForm({ preselectedPosition }: Develo
               />
             </div>
 
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="available_from"
@@ -306,20 +344,6 @@ export default function DeveloperApplicationForm({ preselectedPosition }: Develo
                     <FormLabel>Notice Period</FormLabel>
                     <FormControl>
                       <Input placeholder="e.g., 2 weeks" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="salary_expectation"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Salary Expectation</FormLabel>
-                    <FormControl>
-                      <Input placeholder="e.g., $80,000/year" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -401,6 +425,58 @@ export default function DeveloperApplicationForm({ preselectedPosition }: Develo
                 </FormItem>
               )}
             />
+          </div>
+
+          {/* Resume Upload */}
+          <div className="space-y-4">
+            <h4 className="font-semibold text-lg border-b pb-2">Resume</h4>
+
+            <div className="space-y-2">
+              <FormLabel>Upload Resume (PDF only, max 5MB)</FormLabel>
+
+              {!resumeFile ? (
+                <div
+                  className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-primary/50 transition-colors cursor-pointer"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  <Upload className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
+                  <p className="text-sm text-muted-foreground mb-1">
+                    Click to upload or drag and drop
+                  </p>
+                  <p className="text-xs text-muted-foreground">PDF only (max 5MB)</p>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept=".pdf"
+                    onChange={handleFileChange}
+                    className="hidden"
+                  />
+                </div>
+              ) : (
+                <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg border">
+                  <FileText className="w-8 h-8 text-primary" />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium truncate">{resumeFile.name}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {(resumeFile.size / 1024 / 1024).toFixed(2)} MB
+                    </p>
+                  </div>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={removeFile}
+                    className="text-muted-foreground hover:text-destructive"
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                </div>
+              )}
+
+              {resumeError && (
+                <p className="text-sm text-destructive">{resumeError}</p>
+              )}
+            </div>
           </div>
 
           {/* Links */}

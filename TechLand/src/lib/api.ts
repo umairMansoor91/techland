@@ -4,19 +4,18 @@ export interface DeveloperApplicationData {
   full_name: string;
   email: string;
   phone: string;
-  country: string;
   years_of_experience: number;
   position: string;
   work_mode: string;
   available_from: string;
   notice_period?: string;
-  salary_expectation?: string;
   primary_skills: string;
   programming_languages: string;
   frameworks: string;
   portfolio_url?: string;
   github_url?: string;
   linkedin_url?: string;
+  resume?: File;
   english_proficiency: string;
   cover_letter?: string;
   willing_to_relocate: boolean;
@@ -73,12 +72,25 @@ export async function submitClientInquiry(data: ClientInquiryData): Promise<ApiR
 }
 
 export async function submitDeveloperApplication(data: DeveloperApplicationData): Promise<ApiResponse> {
+  // Use FormData for file upload support
+  const formData = new FormData();
+
+  Object.entries(data).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== '') {
+      if (value instanceof File) {
+        formData.append(key, value);
+      } else if (typeof value === 'boolean') {
+        formData.append(key, value ? 'true' : 'false');
+      } else {
+        formData.append(key, String(value));
+      }
+    }
+  });
+
   const response = await fetch(`${API_BASE_URL}/applications/`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
+    // Don't set Content-Type header - browser will set it with boundary for FormData
+    body: formData,
   });
 
   const result = await response.json();

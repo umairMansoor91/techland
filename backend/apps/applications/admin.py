@@ -44,7 +44,6 @@ class DeveloperApplicationAdmin(admin.ModelAdmin):
                 'full_name',
                 'email',
                 'phone',
-                'country',
                 'years_of_experience',
             )
         }),
@@ -54,7 +53,6 @@ class DeveloperApplicationAdmin(admin.ModelAdmin):
                 'work_mode',
                 'available_from',
                 'notice_period',
-                'salary_expectation',
             )
         }),
         ('Technical Skills', {
@@ -69,6 +67,7 @@ class DeveloperApplicationAdmin(admin.ModelAdmin):
                 'portfolio_url',
                 'github_url',
                 'linkedin_url',
+                'resume',
                 'resume_link',
             )
         }),
