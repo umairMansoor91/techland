@@ -70,7 +70,6 @@ class DeveloperApplicationAdmin(admin.ModelAdmin):
                 'github_url',
                 'linkedin_url',
                 'resume_link',
-                'resume',
             )
         }),
         ('Additional Information', {
