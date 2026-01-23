@@ -208,3 +208,79 @@ class TalentFiltersView(APIView):
                 {'value': 10, 'label': '10+ years'},
             ]
         }, status=status.HTTP_200_OK)
+
+
+class TalentDetailView(APIView):
+    """
+    API endpoint for viewing detailed talent profile.
+    Requires valid client access token.
+    """
+    permission_classes = [AllowAny]
+
+    def get(self, request, talent_id):
+        # Verify token
+        token = request.headers.get('Authorization', '').replace('Bearer ', '')
+        if not token:
+            return Response({
+                'error': 'Authentication required'
+            }, status=status.HTTP_401_UNAUTHORIZED)
+
+        try:
+            ClientCompany.objects.get(access_token=token, is_active=True)
+        except ClientCompany.DoesNotExist:
+            return Response({
+                'error': 'Invalid or expired token'
+            }, status=status.HTTP_401_UNAUTHORIZED)
+
+        # Get the talent profile
+        approved_statuses = ['screening', 'technical', 'interview', 'offer', 'hired']
+        try:
+            talent = DeveloperApplication.objects.get(
+                id=talent_id,
+                status__in=approved_statuses
+            )
+        except DeveloperApplication.DoesNotExist:
+            return Response({
+                'error': 'Talent not found'
+            }, status=status.HTTP_404_NOT_FOUND)
+
+        # Build detailed response (still hiding sensitive info)
+        skills = [s.strip() for s in talent.primary_skills.split(',') if s.strip()]
+        languages = [s.strip() for s in talent.programming_languages.split(',') if s.strip()]
+        tools = [s.strip() for s in talent.frameworks.split(',') if s.strip()]
+
+        # Get first name + last initial
+        parts = talent.full_name.strip().split()
+        if len(parts) >= 2:
+            display_name = f"{parts[0]} {parts[-1][0]}."
+        else:
+            display_name = parts[0] if parts else "Developer"
+
+        return Response({
+            'id': talent.id,
+            'display_name': display_name,
+            'position': talent.position,
+            'position_display': talent.get_position_display(),
+            'years_of_experience': talent.years_of_experience,
+            'work_mode': talent.work_mode,
+            'work_mode_display': talent.get_work_mode_display(),
+            'english_proficiency': talent.english_proficiency,
+            'english_proficiency_display': talent.get_english_proficiency_display(),
+            'available_from': talent.available_from,
+            'notice_period': talent.notice_period,
+            'willing_to_relocate': talent.willing_to_relocate,
+            'skills': skills,
+            'languages': languages,
+            'tools': tools,
+            'portfolio_url': talent.portfolio_url,
+            'github_url': talent.github_url,
+            'linkedin_url': talent.linkedin_url,
+            'cover_letter': talent.cover_letter,
+            # Metrics for display
+            'metrics': {
+                'total_skills': len(skills) + len(languages) + len(tools),
+                'skill_categories': len(set([s.lower() for s in skills])),
+                'experience_level': 'Senior' if talent.years_of_experience >= 7 else 'Mid-Level' if talent.years_of_experience >= 4 else 'Junior',
+                'availability_status': 'Available Now' if talent.available_from <= timezone.now().date() else f'Available {talent.available_from.strftime("%b %d, %Y")}',
+            }
+        }, status=status.HTTP_200_OK)

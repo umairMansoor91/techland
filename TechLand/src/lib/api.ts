@@ -311,3 +311,32 @@ export async function getTalentFilters(token: string): Promise<TalentFilters> {
 
   return result;
 }
+
+export interface TalentDetailMetrics {
+  total_skills: number;
+  skill_categories: number;
+  experience_level: string;
+  availability_status: string;
+}
+
+export interface TalentDetail extends TalentProfile {
+  notice_period?: string;
+  cover_letter?: string;
+  metrics: TalentDetailMetrics;
+}
+
+export async function getTalentDetail(token: string, talentId: number): Promise<TalentDetail> {
+  const response = await fetch(`${API_BASE_URL}/clients/talent/${talentId}/`, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.error || 'Failed to fetch talent details');
+  }
+
+  return result;
+}

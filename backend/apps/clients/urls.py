@@ -3,7 +3,8 @@ from .views import (
     ClientLoginView,
     ClientLogoutView,
     TalentPoolView,
-    TalentFiltersView
+    TalentFiltersView,
+    TalentDetailView
 )
 
 urlpatterns = [
@@ -11,4 +12,5 @@ urlpatterns = [
     path('logout/', ClientLogoutView.as_view(), name='client-logout'),
     path('talent/', TalentPoolView.as_view(), name='talent-pool'),
     path('talent/filters/', TalentFiltersView.as_view(), name='talent-filters'),
+    path('talent/<int:talent_id>/', TalentDetailView.as_view(), name='talent-detail'),
 ]

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -404,8 +404,8 @@ const TalentCard = ({ developer }: { developer: TalentProfile }) => {
           </a>
         )}
         <div className="flex-1" />
-        <Button size="sm" variant="outline" asChild>
-          <a href="/lets-talk-business">Interested</a>
+        <Button size="sm" asChild>
+          <Link to={`/talent-pool/${developer.id}`}>Details</Link>
         </Button>
       </div>
     </Card>

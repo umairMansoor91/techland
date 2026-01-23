@@ -27,6 +27,7 @@ import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ClientLogin from "./pages/ClientLogin";
 import TalentPool from "./pages/TalentPool";
+import TalentDetail from "./pages/TalentDetail";
 import ScrollToTop from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -61,6 +62,7 @@ const App = () => (
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/client-login" element={<ClientLogin />} />
           <Route path="/talent-pool" element={<TalentPool />} />
+          <Route path="/talent-pool/:id" element={<TalentDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
