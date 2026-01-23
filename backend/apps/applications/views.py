@@ -109,7 +109,7 @@ class OpenPositionsListView(APIView):
             },
             {
                 'id': 'ml_engineer',
-                'title': 'Machine Learning Engineer',
+                'title': 'AI/ML Engineer',
                 'department': 'AI/ML',
                 'location': 'Remote',
                 'type': 'Full-time',

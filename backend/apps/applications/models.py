@@ -22,7 +22,7 @@ class DeveloperApplication(models.Model):
         ('fullstack', 'Full Stack Developer'),
         ('react_native', 'React Native Developer'),
         ('devops', 'DevOps Engineer'),
-        ('ml_engineer', 'Machine Learning Engineer'),
+        ('ml_engineer', 'AI/ML Engineer'),
         ('qa_engineer', 'QA Engineer'),
         ('ui_ux', 'UI/UX Designer'),
         ('project_manager', 'Technical Project Manager'),

@@ -176,7 +176,7 @@ export const POSITION_OPTIONS = [
   { value: 'fullstack', label: 'Full Stack Developer' },
   { value: 'react_native', label: 'React Native Developer' },
   { value: 'devops', label: 'DevOps Engineer' },
-  { value: 'ml_engineer', label: 'Machine Learning Engineer' },
+  { value: 'ml_engineer', label: 'AI/ML Engineer' },
   { value: 'qa_engineer', label: 'QA Engineer' },
   { value: 'ui_ux', label: 'UI/UX Designer' },
   { value: 'project_manager', label: 'Technical Project Manager' },
