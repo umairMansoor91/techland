@@ -17,11 +17,7 @@ import {
   Loader2,
   LogOut,
   Search,
-  Briefcase,
-  MapPin,
-  Clock,
   Code,
-  Globe,
   Github,
   Linkedin,
   ExternalLink,
@@ -313,35 +309,12 @@ const TalentCard = ({ developer }: { developer: TalentProfile }) => {
         </Badge>
       </div>
 
-      {/* Info Grid */}
-      <div className="grid grid-cols-2 gap-3 mb-4 text-sm">
-        <div className="flex items-center gap-2 text-muted-foreground">
-          <MapPin className="w-4 h-4" />
-          <span>{developer.work_mode_display}</span>
-        </div>
-        <div className="flex items-center gap-2 text-muted-foreground">
-          <Globe className="w-4 h-4" />
-          <span>{developer.english_proficiency_display}</span>
-        </div>
-        <div className="flex items-center gap-2 text-muted-foreground">
-          <Clock className="w-4 h-4" />
-          <span>
-            Available{" "}
-            {new Date(developer.available_from) <= new Date()
-              ? "Now"
-              : new Date(developer.available_from).toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                })}
-          </span>
-        </div>
-        {developer.willing_to_relocate && (
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <Briefcase className="w-4 h-4" />
-            <span>Can Relocate</span>
-          </div>
-        )}
-      </div>
+      {/* Description */}
+      {developer.cover_letter && (
+        <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
+          {developer.cover_letter}
+        </p>
+      )}
 
       {/* Skills */}
       <div className="mb-4">

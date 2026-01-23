@@ -224,6 +224,7 @@ export interface TalentProfile {
   portfolio_url?: string;
   github_url?: string;
   linkedin_url?: string;
+  cover_letter?: string;
 }
 
 export interface TalentPoolResponse {

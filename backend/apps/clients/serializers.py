@@ -49,6 +49,7 @@ class TalentPoolSerializer(serializers.ModelSerializer):
             'portfolio_url',
             'github_url',
             'linkedin_url',
+            'cover_letter',
         ]
 
     def get_display_name(self, obj):
