@@ -317,121 +317,128 @@ const TalentPool = () => {
 
 const TalentCard = ({ developer }: { developer: TalentProfile }) => {
   return (
-    <Card className="p-6 bg-background hover:shadow-md transition-all duration-200 border-border/50 hover:border-primary/20">
-      {/* Header */}
-      <div className="flex items-start gap-4 mb-5">
-        {/* Avatar */}
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-lg font-semibold text-white shadow-sm">
-          {developer.display_name.charAt(0)}
-        </div>
+    <Card className="group p-0 bg-background hover:shadow-lg transition-all duration-300 border-border/40 hover:border-primary/30 overflow-hidden">
+      {/* Top accent bar */}
+      <div className="h-1 bg-gradient-to-r from-primary via-accent to-primary opacity-80" />
 
-        {/* Name & Role */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between gap-3">
-            <div>
-              <h3 className="font-semibold text-lg leading-tight">{developer.display_name}</h3>
-              <p className="text-primary font-medium text-sm">{developer.position_display}</p>
-            </div>
-            <div className="flex items-center gap-2 flex-shrink-0">
-              <Badge variant="secondary" className="text-xs">
-                {developer.years_of_experience}+ yrs
-              </Badge>
-              <Badge variant="outline" className="text-xs">
+      <div className="p-6">
+        {/* Header */}
+        <div className="flex items-start gap-4 mb-4">
+          {/* Avatar */}
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-xl font-bold text-white shadow-md">
+            {developer.display_name.charAt(0)}
+          </div>
+
+          {/* Name & Role */}
+          <div className="flex-1 min-w-0">
+            <h3 className="font-bold text-xl tracking-tight mb-0.5">{developer.display_name}</h3>
+            <p className="text-primary font-semibold">{developer.position_display}</p>
+            <div className="flex items-center gap-2 mt-2">
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium">
+                {developer.years_of_experience}+ years
+              </span>
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-medium">
                 <Globe className="w-3 h-3 mr-1" />
                 {developer.english_proficiency_display}
-              </Badge>
+              </span>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Description */}
-      {developer.cover_letter && (
-        <p className="text-sm text-muted-foreground mb-5 line-clamp-2 leading-relaxed">
-          {developer.cover_letter}
-        </p>
-      )}
-
-      {/* Skills Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
-        {/* Primary Skills */}
-        {developer.skills.length > 0 && (
-          <div className="space-y-2">
-            <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-              <Code2 className="w-3.5 h-3.5" />
-              Skills
-            </div>
-            <div className="flex flex-wrap gap-1">
-              {developer.skills.slice(0, 4).map((skill, idx) => (
-                <span
-                  key={idx}
-                  className="inline-flex items-center px-2 py-0.5 rounded bg-primary/10 text-primary text-xs font-medium"
-                >
-                  {skill}
-                </span>
-              ))}
-              {developer.skills.length > 4 && (
-                <span className="text-xs text-muted-foreground">+{developer.skills.length - 4}</span>
-              )}
-            </div>
-          </div>
+        {/* Description */}
+        {developer.cover_letter && (
+          <p className="text-[15px] text-muted-foreground mb-5 line-clamp-2 leading-relaxed">
+            {developer.cover_letter}
+          </p>
         )}
 
-        {/* Languages */}
-        {developer.languages.length > 0 && (
-          <div className="space-y-2">
-            <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-              <Terminal className="w-3.5 h-3.5" />
-              Languages
+        {/* Skills Sections */}
+        <div className="space-y-4">
+          {/* Primary Skills */}
+          {developer.skills.length > 0 && (
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <Code2 className="w-4 h-4 text-primary" />
+                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Skills</span>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {developer.skills.slice(0, 5).map((skill, idx) => (
+                  <span
+                    key={idx}
+                    className="inline-flex items-center px-2.5 py-1 rounded-md bg-primary/10 text-primary text-xs font-medium"
+                  >
+                    {skill}
+                  </span>
+                ))}
+                {developer.skills.length > 5 && (
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-muted text-muted-foreground text-xs">
+                    +{developer.skills.length - 5} more
+                  </span>
+                )}
+              </div>
             </div>
-            <div className="flex flex-wrap gap-1">
-              {developer.languages.slice(0, 4).map((lang, idx) => (
-                <span
-                  key={idx}
-                  className="inline-flex items-center px-2 py-0.5 rounded bg-accent/10 text-accent-foreground text-xs font-medium"
-                >
-                  {lang}
-                </span>
-              ))}
-              {developer.languages.length > 4 && (
-                <span className="text-xs text-muted-foreground">+{developer.languages.length - 4}</span>
-              )}
-            </div>
-          </div>
-        )}
+          )}
 
-        {/* Frameworks & Tools */}
-        {developer.tools.length > 0 && (
-          <div className="space-y-2">
-            <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-              <Wrench className="w-3.5 h-3.5" />
-              Frameworks
+          {/* Languages */}
+          {developer.languages.length > 0 && (
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <Terminal className="w-4 h-4 text-blue-500" />
+                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Languages</span>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {developer.languages.slice(0, 5).map((lang, idx) => (
+                  <span
+                    key={idx}
+                    className="inline-flex items-center px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-medium"
+                  >
+                    {lang}
+                  </span>
+                ))}
+                {developer.languages.length > 5 && (
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-muted text-muted-foreground text-xs">
+                    +{developer.languages.length - 5} more
+                  </span>
+                )}
+              </div>
             </div>
-            <div className="flex flex-wrap gap-1">
-              {developer.tools.slice(0, 4).map((tool, idx) => (
-                <span
-                  key={idx}
-                  className="inline-flex items-center px-2 py-0.5 rounded bg-muted text-xs font-medium"
-                >
-                  {tool}
-                </span>
-              ))}
-              {developer.tools.length > 4 && (
-                <span className="text-xs text-muted-foreground">+{developer.tools.length - 4}</span>
-              )}
-            </div>
-          </div>
-        )}
-      </div>
+          )}
 
-      {/* Footer */}
-      <div className="flex items-center justify-end pt-4 border-t border-border/50">
-        <Button size="sm" className="group" asChild>
-          <Link to={`/talent-pool/${developer.id}`}>
-            View Full Profile
-            <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-0.5 transition-transform" />
-          </Link>
-        </Button>
+          {/* Frameworks & Tools */}
+          {developer.tools.length > 0 && (
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <Wrench className="w-4 h-4 text-orange-500" />
+                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Frameworks</span>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {developer.tools.slice(0, 5).map((tool, idx) => (
+                  <span
+                    key={idx}
+                    className="inline-flex items-center px-2.5 py-1 rounded-md bg-orange-500/10 text-orange-600 dark:text-orange-400 text-xs font-medium"
+                  >
+                    {tool}
+                  </span>
+                ))}
+                {developer.tools.length > 5 && (
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-muted text-muted-foreground text-xs">
+                    +{developer.tools.length - 5} more
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-end pt-5 mt-5 border-t border-border/40">
+          <Button size="sm" className="group/btn shadow-sm" asChild>
+            <Link to={`/talent-pool/${developer.id}`}>
+              View Full Profile
+              <ArrowRight className="w-4 h-4 ml-1.5 group-hover/btn:translate-x-0.5 transition-transform" />
+            </Link>
+          </Button>
+        </div>
       </div>
     </Card>
   );
