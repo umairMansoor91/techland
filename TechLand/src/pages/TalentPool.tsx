@@ -356,7 +356,7 @@ const TalentCard = ({ developer }: { developer: TalentProfile }) => {
               {developer.skills.slice(0, 3).map((skill, idx) => (
                 <span
                   key={idx}
-                  className="px-1.5 py-0.5 rounded text-[11px] bg-violet-500/10 text-violet-600 dark:text-violet-400 font-medium"
+                  className="px-1.5 py-0.5 rounded text-[11px] bg-violet-500 text-white font-medium"
                 >
                   {skill}
                 </span>
@@ -377,7 +377,7 @@ const TalentCard = ({ developer }: { developer: TalentProfile }) => {
               {developer.languages.slice(0, 3).map((lang, idx) => (
                 <span
                   key={idx}
-                  className="px-1.5 py-0.5 rounded text-[11px] bg-sky-500/10 text-sky-600 dark:text-sky-400 font-medium"
+                  className="px-1.5 py-0.5 rounded text-[11px] bg-sky-500 text-white font-medium"
                 >
                   {lang}
                 </span>
@@ -398,7 +398,7 @@ const TalentCard = ({ developer }: { developer: TalentProfile }) => {
               {developer.tools.slice(0, 3).map((tool, idx) => (
                 <span
                   key={idx}
-                  className="px-1.5 py-0.5 rounded text-[11px] bg-amber-500/10 text-amber-600 dark:text-amber-400 font-medium"
+                  className="px-1.5 py-0.5 rounded text-[11px] bg-amber-500 text-white font-medium"
                 >
                   {tool}
                 </span>
