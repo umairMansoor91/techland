@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
   Select,
   SelectContent,
@@ -23,6 +22,11 @@ import {
   Terminal,
   Wrench,
   Globe,
+  X,
+  Clock,
+  MapPin,
+  Calendar,
+  MessageSquare,
 } from "lucide-react";
 import {
   getTalentPool,
@@ -39,6 +43,7 @@ const TalentPool = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [companyName, setCompanyName] = useState<string>("");
+  const [selectedDeveloper, setSelectedDeveloper] = useState<TalentProfile | null>(null);
 
   // Filter state
   const [selectedPosition, setSelectedPosition] = useState<string>("");
@@ -58,6 +63,15 @@ const TalentPool = () => {
     loadFilters();
     loadTalent();
   }, [token, navigate]);
+
+  // Close drawer on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedDeveloper(null);
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, []);
 
   const loadFilters = async () => {
     if (!token) return;
@@ -192,7 +206,12 @@ const TalentPool = () => {
               ) : (
                 <div className="space-y-4">
                   {talent.map((dev) => (
-                    <TalentCard key={dev.id} developer={dev} />
+                    <TalentCard
+                      key={dev.id}
+                      developer={dev}
+                      onClick={() => setSelectedDeveloper(dev)}
+                      isSelected={selectedDeveloper?.id === dev.id}
+                    />
                   ))}
                 </div>
               )}
@@ -310,14 +329,27 @@ const TalentPool = () => {
       </section>
 
       <Footer />
+
+      {/* Slide-out Drawer */}
+      <TalentDrawer
+        developer={selectedDeveloper}
+        onClose={() => setSelectedDeveloper(null)}
+      />
     </div>
   );
 };
 
-const TalentCard = ({ developer }: { developer: TalentProfile }) => {
+// Talent Card Component
+interface TalentCardProps {
+  developer: TalentProfile;
+  onClick: () => void;
+  isSelected: boolean;
+}
+
+const TalentCard = ({ developer, onClick, isSelected }: TalentCardProps) => {
   return (
-    <Link to={`/talent-pool/${developer.id}`} className="block group">
-      <Card className="p-5 bg-background hover:bg-muted/20 hover:shadow-md transition-all duration-200 border-border/50 hover:border-primary/40">
+    <div onClick={onClick} className="block group cursor-pointer">
+      <Card className={`p-5 bg-background hover:bg-muted/20 hover:shadow-md transition-all duration-200 border-border/50 hover:border-primary/40 ${isSelected ? 'ring-2 ring-primary border-primary' : ''}`}>
         {/* Header Row */}
         <div className="flex items-start justify-between gap-4 mb-4">
           <div className="min-w-0">
@@ -410,7 +442,175 @@ const TalentCard = ({ developer }: { developer: TalentProfile }) => {
           </div>
         </div>
       </Card>
-    </Link>
+    </div>
+  );
+};
+
+// Slide-out Drawer Component
+interface TalentDrawerProps {
+  developer: TalentProfile | null;
+  onClose: () => void;
+}
+
+const TalentDrawer = ({ developer, onClose }: TalentDrawerProps) => {
+  if (!developer) return null;
+
+  return (
+    <>
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 bg-black/50 z-50 transition-opacity"
+        onClick={onClose}
+      />
+
+      {/* Drawer Panel */}
+      <div className="fixed top-0 right-0 h-full w-full max-w-lg bg-background z-50 shadow-2xl animate-in slide-in-from-right duration-300 overflow-hidden flex flex-col">
+        {/* Header */}
+        <div className="flex items-start justify-between p-6 border-b bg-gradient-to-r from-primary/5 to-accent/5">
+          <div>
+            <h2 className="text-xl font-bold">{developer.display_name}</h2>
+            <p className="text-primary font-medium">{developer.position_display}</p>
+          </div>
+          <button
+            onClick={onClose}
+            className="p-2 rounded-lg hover:bg-muted transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto p-6 space-y-6">
+          {/* Quick Stats */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
+              <Clock className="w-5 h-5 text-primary" />
+              <div>
+                <p className="text-xs text-muted-foreground">Experience</p>
+                <p className="font-semibold">{developer.years_of_experience}+ years</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
+              <Globe className="w-5 h-5 text-emerald-500" />
+              <div>
+                <p className="text-xs text-muted-foreground">English</p>
+                <p className="font-semibold">{developer.english_proficiency_display}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
+              <MapPin className="w-5 h-5 text-blue-500" />
+              <div>
+                <p className="text-xs text-muted-foreground">Work Mode</p>
+                <p className="font-semibold">{developer.work_mode_display}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
+              <Calendar className="w-5 h-5 text-orange-500" />
+              <div>
+                <p className="text-xs text-muted-foreground">Available</p>
+                <p className="font-semibold">
+                  {new Date(developer.available_from) <= new Date()
+                    ? "Immediately"
+                    : new Date(developer.available_from).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                      })}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* About */}
+          {developer.cover_letter && (
+            <div>
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">About</h3>
+              <p className="text-sm leading-relaxed">{developer.cover_letter}</p>
+            </div>
+          )}
+
+          {/* Skills */}
+          {developer.skills.length > 0 && (
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <Code2 className="w-4 h-4 text-violet-500" />
+                <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Skills</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {developer.skills.map((skill, idx) => (
+                  <span
+                    key={idx}
+                    className="px-3 py-1.5 rounded-lg text-sm bg-violet-500 text-white font-medium"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Languages */}
+          {developer.languages.length > 0 && (
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <Terminal className="w-4 h-4 text-sky-500" />
+                <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Programming Languages</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {developer.languages.map((lang, idx) => (
+                  <span
+                    key={idx}
+                    className="px-3 py-1.5 rounded-lg text-sm bg-sky-500 text-white font-medium"
+                  >
+                    {lang}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Frameworks */}
+          {developer.tools.length > 0 && (
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <Wrench className="w-4 h-4 text-amber-500" />
+                <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Frameworks & Tools</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {developer.tools.map((tool, idx) => (
+                  <span
+                    key={idx}
+                    className="px-3 py-1.5 rounded-lg text-sm bg-amber-500 text-white font-medium"
+                  >
+                    {tool}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Relocation */}
+          {developer.willing_to_relocate && (
+            <div className="flex items-center gap-2 p-3 rounded-lg bg-green-500/10 text-green-600 dark:text-green-400">
+              <MapPin className="w-4 h-4" />
+              <span className="text-sm font-medium">Open to relocation</span>
+            </div>
+          )}
+        </div>
+
+        {/* Footer CTA */}
+        <div className="p-6 border-t bg-muted/30">
+          <Button className="w-full" size="lg" asChild>
+            <a href="/lets-talk-business">
+              <MessageSquare className="w-4 h-4 mr-2" />
+              Request Introduction
+            </a>
+          </Button>
+          <p className="text-xs text-muted-foreground text-center mt-3">
+            We'll connect you with this candidate within 24 hours
+          </p>
+        </div>
+      </div>
+    </>
   );
 };
 
