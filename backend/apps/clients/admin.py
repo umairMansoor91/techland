@@ -8,8 +8,15 @@ class ClientCompanyAdminForm(forms.ModelForm):
     new_password = forms.CharField(
         widget=forms.PasswordInput,
         required=False,
-        help_text='Leave blank to keep current password'
+        help_text='Enter password (required for new accounts)'
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Make password required for new records
+        if not self.instance.pk:
+            self.fields['new_password'].required = True
+            self.fields['new_password'].help_text = 'Password is required'
 
     class Meta:
         model = ClientCompany
