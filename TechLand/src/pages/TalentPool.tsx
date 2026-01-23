@@ -316,106 +316,97 @@ const TalentPool = () => {
 
 const TalentCard = ({ developer }: { developer: TalentProfile }) => {
   return (
-    <Link to={`/talent-pool/${developer.id}`} className="block">
-      <Card className="group bg-background hover:shadow-lg transition-all duration-300 border-border/40 hover:border-primary/30 overflow-hidden cursor-pointer">
-        <div className="flex flex-col md:flex-row">
-          {/* Left Column - Profile Info */}
-          <div className="flex-1 p-5 md:border-r border-border/30">
-            {/* Header */}
-            <div className="mb-3">
-              <h3 className="font-bold text-lg tracking-tight leading-tight group-hover:text-primary transition-colors">{developer.display_name}</h3>
-              <p className="text-primary font-medium text-sm">{developer.position_display}</p>
-            </div>
+    <Link to={`/talent-pool/${developer.id}`} className="block group">
+      <Card className="p-5 bg-background hover:bg-muted/20 hover:shadow-md transition-all duration-200 border-border/50 hover:border-primary/40">
+        {/* Header Row */}
+        <div className="flex items-start justify-between gap-4 mb-4">
+          <div className="min-w-0">
+            <h3 className="font-semibold text-base group-hover:text-primary transition-colors truncate">
+              {developer.display_name}
+            </h3>
+            <p className="text-primary/80 text-sm">{developer.position_display}</p>
+          </div>
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <span className="px-2 py-0.5 rounded bg-muted text-xs font-medium text-foreground">
+              {developer.years_of_experience}+ yrs
+            </span>
+            <span className="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 text-xs font-medium flex items-center">
+              <Globe className="w-3 h-3 mr-1" />
+              {developer.english_proficiency_display}
+            </span>
+          </div>
+        </div>
 
-            {/* Badges */}
-            <div className="flex flex-wrap items-center gap-1.5 mb-3">
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary text-secondary-foreground text-xs font-medium">
-                {developer.years_of_experience}+ yrs
-              </span>
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-medium">
-                <Globe className="w-3 h-3 mr-1" />
-                {developer.english_proficiency_display}
-              </span>
-            </div>
+        {/* Description */}
+        {developer.cover_letter && (
+          <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
+            {developer.cover_letter}
+          </p>
+        )}
 
-            {/* Description */}
-            {developer.cover_letter && (
-              <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
-                {developer.cover_letter}
-              </p>
-            )}
+        {/* Tech Stack - Single Row Grid */}
+        <div className="grid grid-cols-3 gap-4 pt-4 border-t border-border/50">
+          {/* Skills */}
+          <div>
+            <div className="flex items-center gap-1.5 mb-2">
+              <Code2 className="w-3.5 h-3.5 text-violet-500" />
+              <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">Skills</span>
+            </div>
+            <div className="flex flex-wrap gap-1">
+              {developer.skills.slice(0, 3).map((skill, idx) => (
+                <span
+                  key={idx}
+                  className="px-1.5 py-0.5 rounded text-[11px] bg-violet-500/10 text-violet-600 dark:text-violet-400 font-medium"
+                >
+                  {skill}
+                </span>
+              ))}
+              {developer.skills.length > 3 && (
+                <span className="text-[11px] text-muted-foreground">+{developer.skills.length - 3}</span>
+              )}
+            </div>
           </div>
 
-          {/* Right Column - Skills */}
-          <div className="md:w-[55%] p-5 bg-muted/30 space-y-3">
-            {/* Skills */}
-            {developer.skills.length > 0 && (
-              <div>
-                <div className="flex items-center gap-1.5 mb-1.5">
-                  <Code2 className="w-3.5 h-3.5 text-primary" />
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Skills</span>
-                </div>
-                <div className="flex flex-wrap gap-1">
-                  {developer.skills.slice(0, 4).map((skill, idx) => (
-                    <span
-                      key={idx}
-                      className="inline-flex items-center px-2 py-0.5 rounded bg-primary/10 text-primary text-xs font-medium"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                  {developer.skills.length > 4 && (
-                    <span className="text-xs text-muted-foreground">+{developer.skills.length - 4}</span>
-                  )}
-                </div>
-              </div>
-            )}
+          {/* Languages */}
+          <div>
+            <div className="flex items-center gap-1.5 mb-2">
+              <Terminal className="w-3.5 h-3.5 text-sky-500" />
+              <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">Languages</span>
+            </div>
+            <div className="flex flex-wrap gap-1">
+              {developer.languages.slice(0, 3).map((lang, idx) => (
+                <span
+                  key={idx}
+                  className="px-1.5 py-0.5 rounded text-[11px] bg-sky-500/10 text-sky-600 dark:text-sky-400 font-medium"
+                >
+                  {lang}
+                </span>
+              ))}
+              {developer.languages.length > 3 && (
+                <span className="text-[11px] text-muted-foreground">+{developer.languages.length - 3}</span>
+              )}
+            </div>
+          </div>
 
-            {/* Languages */}
-            {developer.languages.length > 0 && (
-              <div>
-                <div className="flex items-center gap-1.5 mb-1.5">
-                  <Terminal className="w-3.5 h-3.5 text-blue-500" />
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Languages</span>
-                </div>
-                <div className="flex flex-wrap gap-1">
-                  {developer.languages.slice(0, 4).map((lang, idx) => (
-                    <span
-                      key={idx}
-                      className="inline-flex items-center px-2 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-medium"
-                    >
-                      {lang}
-                    </span>
-                  ))}
-                  {developer.languages.length > 4 && (
-                    <span className="text-xs text-muted-foreground">+{developer.languages.length - 4}</span>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {/* Frameworks */}
-            {developer.tools.length > 0 && (
-              <div>
-                <div className="flex items-center gap-1.5 mb-1.5">
-                  <Wrench className="w-3.5 h-3.5 text-orange-500" />
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Frameworks</span>
-                </div>
-                <div className="flex flex-wrap gap-1">
-                  {developer.tools.slice(0, 4).map((tool, idx) => (
-                    <span
-                      key={idx}
-                      className="inline-flex items-center px-2 py-0.5 rounded bg-orange-500/10 text-orange-600 dark:text-orange-400 text-xs font-medium"
-                    >
-                      {tool}
-                    </span>
-                  ))}
-                  {developer.tools.length > 4 && (
-                    <span className="text-xs text-muted-foreground">+{developer.tools.length - 4}</span>
-                  )}
-                </div>
-              </div>
-            )}
+          {/* Frameworks */}
+          <div>
+            <div className="flex items-center gap-1.5 mb-2">
+              <Wrench className="w-3.5 h-3.5 text-amber-500" />
+              <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">Frameworks</span>
+            </div>
+            <div className="flex flex-wrap gap-1">
+              {developer.tools.slice(0, 3).map((tool, idx) => (
+                <span
+                  key={idx}
+                  className="px-1.5 py-0.5 rounded text-[11px] bg-amber-500/10 text-amber-600 dark:text-amber-400 font-medium"
+                >
+                  {tool}
+                </span>
+              ))}
+              {developer.tools.length > 3 && (
+                <span className="text-[11px] text-muted-foreground">+{developer.tools.length - 3}</span>
+              )}
+            </div>
           </div>
         </div>
       </Card>
