@@ -81,9 +81,9 @@ const TalentPool = () => {
 
     try {
       const data = await getTalentPool(token, {
-        position: selectedPosition || undefined,
-        work_mode: selectedWorkMode || undefined,
-        min_experience: selectedExperience ? parseInt(selectedExperience) : undefined,
+        position: selectedPosition && selectedPosition !== "all" ? selectedPosition : undefined,
+        work_mode: selectedWorkMode && selectedWorkMode !== "all" ? selectedWorkMode : undefined,
+        min_experience: selectedExperience && selectedExperience !== "0" ? parseInt(selectedExperience) : undefined,
         skill: skillSearch || undefined,
       });
       setTalent(data.talent);
@@ -116,14 +116,18 @@ const TalentPool = () => {
   };
 
   const clearFilters = () => {
-    setSelectedPosition("");
-    setSelectedWorkMode("");
-    setSelectedExperience("");
+    setSelectedPosition("all");
+    setSelectedWorkMode("all");
+    setSelectedExperience("0");
     setSkillSearch("");
     setTimeout(loadTalent, 0);
   };
 
-  const hasActiveFilters = selectedPosition || selectedWorkMode || selectedExperience || skillSearch;
+  const hasActiveFilters =
+    (selectedPosition && selectedPosition !== "all") ||
+    (selectedWorkMode && selectedWorkMode !== "all") ||
+    (selectedExperience && selectedExperience !== "0") ||
+    skillSearch;
 
   if (!token) {
     return null;
@@ -162,12 +166,12 @@ const TalentPool = () => {
               {/* Position Filter */}
               <div className="space-y-1.5">
                 <label className="text-xs font-medium text-muted-foreground">Role</label>
-                <Select value={selectedPosition} onValueChange={setSelectedPosition}>
+                <Select value={selectedPosition || "all"} onValueChange={setSelectedPosition}>
                   <SelectTrigger className="h-9">
                     <SelectValue placeholder="All Roles" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">All Roles</SelectItem>
+                    <SelectItem value="all">All Roles</SelectItem>
                     {filters?.positions.map((pos) => (
                       <SelectItem key={pos.value} value={pos.value}>
                         {pos.label}
@@ -180,12 +184,12 @@ const TalentPool = () => {
               {/* Work Mode Filter */}
               <div className="space-y-1.5">
                 <label className="text-xs font-medium text-muted-foreground">Work Mode</label>
-                <Select value={selectedWorkMode} onValueChange={setSelectedWorkMode}>
+                <Select value={selectedWorkMode || "all"} onValueChange={setSelectedWorkMode}>
                   <SelectTrigger className="h-9">
                     <SelectValue placeholder="Any" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Any</SelectItem>
+                    <SelectItem value="all">Any</SelectItem>
                     {filters?.work_modes.map((mode) => (
                       <SelectItem key={mode.value} value={mode.value}>
                         {mode.label}
@@ -198,7 +202,7 @@ const TalentPool = () => {
               {/* Experience Filter */}
               <div className="space-y-1.5">
                 <label className="text-xs font-medium text-muted-foreground">Experience</label>
-                <Select value={selectedExperience} onValueChange={setSelectedExperience}>
+                <Select value={selectedExperience || "0"} onValueChange={setSelectedExperience}>
                   <SelectTrigger className="h-9">
                     <SelectValue placeholder="Any" />
                   </SelectTrigger>
