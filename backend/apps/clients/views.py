@@ -3,6 +3,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 
 from apps.applications.models import DeveloperApplication
@@ -14,12 +16,14 @@ from .serializers import (
 )
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class ClientLoginView(APIView):
     """
     API endpoint for client company login.
     Returns an access token for accessing the talent pool.
     """
     permission_classes = [AllowAny]
+    authentication_classes = []  # Disable authentication for login
 
     @extend_schema(
         request=ClientLoginSerializer,
@@ -60,12 +64,14 @@ class ClientLoginView(APIView):
         }, status=status.HTTP_200_OK)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class ClientLogoutView(APIView):
     """
     API endpoint for client logout.
     Invalidates the current access token.
     """
     permission_classes = [AllowAny]
+    authentication_classes = []
 
     def post(self, request):
         token = request.headers.get('Authorization', '').replace('Bearer ', '')
