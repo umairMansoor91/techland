@@ -197,3 +197,117 @@ export const ENGLISH_PROFICIENCY_OPTIONS = [
   { value: 'advanced', label: 'Advanced' },
   { value: 'fluent', label: 'Fluent/Native' },
 ];
+
+// Client Portal API
+
+export interface ClientLoginResponse {
+  token: string;
+  company_name: string;
+  message: string;
+}
+
+export interface TalentProfile {
+  id: number;
+  display_name: string;
+  position: string;
+  position_display: string;
+  years_of_experience: number;
+  work_mode: string;
+  work_mode_display: string;
+  english_proficiency: string;
+  english_proficiency_display: string;
+  skills: string[];
+  languages: string[];
+  tools: string[];
+  available_from: string;
+  willing_to_relocate: boolean;
+  portfolio_url?: string;
+  github_url?: string;
+  linkedin_url?: string;
+}
+
+export interface TalentPoolResponse {
+  count: number;
+  talent: TalentProfile[];
+}
+
+export interface TalentFilters {
+  positions: { value: string; label: string }[];
+  work_modes: { value: string; label: string }[];
+  experience_levels: { value: number; label: string }[];
+}
+
+export async function clientLogin(email: string, password: string): Promise<ClientLoginResponse> {
+  const response = await fetch(`${API_BASE_URL}/clients/login/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email, password }),
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.error || 'Login failed');
+  }
+
+  return result;
+}
+
+export async function clientLogout(token: string): Promise<void> {
+  await fetch(`${API_BASE_URL}/clients/logout/`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+}
+
+export async function getTalentPool(
+  token: string,
+  filters?: {
+    position?: string;
+    work_mode?: string;
+    min_experience?: number;
+    skill?: string;
+  }
+): Promise<TalentPoolResponse> {
+  const params = new URLSearchParams();
+  if (filters?.position) params.append('position', filters.position);
+  if (filters?.work_mode) params.append('work_mode', filters.work_mode);
+  if (filters?.min_experience) params.append('min_experience', filters.min_experience.toString());
+  if (filters?.skill) params.append('skill', filters.skill);
+
+  const url = `${API_BASE_URL}/clients/talent/${params.toString() ? '?' + params.toString() : ''}`;
+
+  const response = await fetch(url, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.error || 'Failed to fetch talent pool');
+  }
+
+  return result;
+}
+
+export async function getTalentFilters(token: string): Promise<TalentFilters> {
+  const response = await fetch(`${API_BASE_URL}/clients/talent/filters/`, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.error || 'Failed to fetch filters');
+  }
+
+  return result;
+}
