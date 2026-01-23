@@ -17,13 +17,13 @@ import {
   Loader2,
   LogOut,
   Search,
-  Github,
-  Linkedin,
-  ExternalLink,
   Users,
   ArrowRight,
   SlidersHorizontal,
-  X,
+  Code2,
+  Terminal,
+  Wrench,
+  Globe,
 } from "lucide-react";
 import {
   getTalentPool,
@@ -318,96 +318,120 @@ const TalentPool = () => {
 const TalentCard = ({ developer }: { developer: TalentProfile }) => {
   return (
     <Card className="p-6 bg-background hover:shadow-md transition-all duration-200 border-border/50 hover:border-primary/20">
-      <div className="flex flex-col md:flex-row md:items-start gap-5">
+      {/* Header */}
+      <div className="flex items-start gap-4 mb-5">
         {/* Avatar */}
-        <div className="flex-shrink-0">
-          <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-xl font-semibold text-primary">
-            {developer.display_name.charAt(0)}
-          </div>
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-lg font-semibold text-white shadow-sm">
+          {developer.display_name.charAt(0)}
         </div>
 
-        {/* Content */}
+        {/* Name & Role */}
         <div className="flex-1 min-w-0">
-          {/* Header Row */}
-          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+          <div className="flex items-start justify-between gap-3">
             <div>
               <h3 className="font-semibold text-lg leading-tight">{developer.display_name}</h3>
               <p className="text-primary font-medium text-sm">{developer.position_display}</p>
             </div>
-            <Badge variant="secondary" className="self-start text-xs px-2.5 py-1">
-              {developer.years_of_experience}+ years
-            </Badge>
-          </div>
-
-          {/* Description */}
-          {developer.cover_letter && (
-            <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-              {developer.cover_letter}
-            </p>
-          )}
-
-          {/* Skills */}
-          <div className="flex flex-wrap gap-1.5 mb-4">
-            {developer.skills.slice(0, 6).map((skill, idx) => (
-              <span
-                key={idx}
-                className="inline-flex items-center px-2.5 py-1 rounded-md bg-muted text-xs font-medium"
-              >
-                {skill}
-              </span>
-            ))}
-            {developer.skills.length > 6 && (
-              <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-muted/50 text-xs text-muted-foreground">
-                +{developer.skills.length - 6} more
-              </span>
-            )}
-          </div>
-
-          {/* Footer */}
-          <div className="flex items-center justify-between pt-4 border-t border-border/50">
-            {/* Social Links */}
-            <div className="flex items-center gap-1">
-              {developer.github_url && (
-                <a
-                  href={developer.github_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                >
-                  <Github className="w-4 h-4" />
-                </a>
-              )}
-              {developer.linkedin_url && (
-                <a
-                  href={developer.linkedin_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                >
-                  <Linkedin className="w-4 h-4" />
-                </a>
-              )}
-              {developer.portfolio_url && (
-                <a
-                  href={developer.portfolio_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              )}
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <Badge variant="secondary" className="text-xs">
+                {developer.years_of_experience}+ yrs
+              </Badge>
+              <Badge variant="outline" className="text-xs">
+                <Globe className="w-3 h-3 mr-1" />
+                {developer.english_proficiency_display}
+              </Badge>
             </div>
-
-            {/* View Profile Button */}
-            <Button variant="ghost" size="sm" className="group" asChild>
-              <Link to={`/talent-pool/${developer.id}`}>
-                View Profile
-                <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-0.5 transition-transform" />
-              </Link>
-            </Button>
           </div>
         </div>
+      </div>
+
+      {/* Description */}
+      {developer.cover_letter && (
+        <p className="text-sm text-muted-foreground mb-5 line-clamp-2 leading-relaxed">
+          {developer.cover_letter}
+        </p>
+      )}
+
+      {/* Skills Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+        {/* Primary Skills */}
+        {developer.skills.length > 0 && (
+          <div className="space-y-2">
+            <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+              <Code2 className="w-3.5 h-3.5" />
+              Skills
+            </div>
+            <div className="flex flex-wrap gap-1">
+              {developer.skills.slice(0, 4).map((skill, idx) => (
+                <span
+                  key={idx}
+                  className="inline-flex items-center px-2 py-0.5 rounded bg-primary/10 text-primary text-xs font-medium"
+                >
+                  {skill}
+                </span>
+              ))}
+              {developer.skills.length > 4 && (
+                <span className="text-xs text-muted-foreground">+{developer.skills.length - 4}</span>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Languages */}
+        {developer.languages.length > 0 && (
+          <div className="space-y-2">
+            <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+              <Terminal className="w-3.5 h-3.5" />
+              Languages
+            </div>
+            <div className="flex flex-wrap gap-1">
+              {developer.languages.slice(0, 4).map((lang, idx) => (
+                <span
+                  key={idx}
+                  className="inline-flex items-center px-2 py-0.5 rounded bg-accent/10 text-accent-foreground text-xs font-medium"
+                >
+                  {lang}
+                </span>
+              ))}
+              {developer.languages.length > 4 && (
+                <span className="text-xs text-muted-foreground">+{developer.languages.length - 4}</span>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Frameworks & Tools */}
+        {developer.tools.length > 0 && (
+          <div className="space-y-2">
+            <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+              <Wrench className="w-3.5 h-3.5" />
+              Frameworks
+            </div>
+            <div className="flex flex-wrap gap-1">
+              {developer.tools.slice(0, 4).map((tool, idx) => (
+                <span
+                  key={idx}
+                  className="inline-flex items-center px-2 py-0.5 rounded bg-muted text-xs font-medium"
+                >
+                  {tool}
+                </span>
+              ))}
+              {developer.tools.length > 4 && (
+                <span className="text-xs text-muted-foreground">+{developer.tools.length - 4}</span>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Footer */}
+      <div className="flex items-center justify-end pt-4 border-t border-border/50">
+        <Button size="sm" className="group" asChild>
+          <Link to={`/talent-pool/${developer.id}`}>
+            View Full Profile
+            <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-0.5 transition-transform" />
+          </Link>
+        </Button>
       </div>
     </Card>
   );
