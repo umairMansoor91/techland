@@ -17,12 +17,12 @@ import {
   Loader2,
   LogOut,
   Search,
-  Code,
   Github,
   Linkedin,
   ExternalLink,
   Users,
-  Filter,
+  ArrowRight,
+  SlidersHorizontal,
   X,
 } from "lucide-react";
 import {
@@ -130,23 +130,20 @@ const TalentPool = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-muted/30">
       <Navigation />
 
       {/* Header */}
-      <section className="pt-28 pb-8 bg-muted/30 border-b">
+      <section className="pt-28 pb-6 bg-background border-b">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-              <Badge className="mb-2">Client Portal</Badge>
-              <h1 className="text-2xl md:text-3xl font-bold">
-                Welcome, <span className="gradient-text">{companyName}</span>
+              <p className="text-sm text-muted-foreground mb-1">Client Portal</p>
+              <h1 className="text-2xl font-semibold">
+                Welcome back, <span className="gradient-text">{companyName}</span>
               </h1>
-              <p className="text-muted-foreground mt-1">
-                Browse our pre-vetted talent pool for your team
-              </p>
             </div>
-            <Button variant="outline" onClick={handleLogout}>
+            <Button variant="ghost" size="sm" onClick={handleLogout} className="text-muted-foreground">
               <LogOut className="w-4 h-4 mr-2" />
               Sign Out
             </Button>
@@ -154,139 +151,162 @@ const TalentPool = () => {
         </div>
       </section>
 
-      {/* Filters */}
-      <section className="py-6 border-b bg-background sticky top-16 z-40">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row gap-4 items-end">
-            <div className="flex-1 grid grid-cols-2 md:grid-cols-4 gap-3">
-              {/* Position Filter */}
-              <div className="space-y-1.5">
-                <label className="text-xs font-medium text-muted-foreground">Role</label>
-                <Select value={selectedPosition || "all"} onValueChange={setSelectedPosition}>
-                  <SelectTrigger className="h-9">
-                    <SelectValue placeholder="All Roles" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Roles</SelectItem>
-                    {filters?.positions.map((pos) => (
-                      <SelectItem key={pos.value} value={pos.value}>
-                        {pos.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Work Mode Filter */}
-              <div className="space-y-1.5">
-                <label className="text-xs font-medium text-muted-foreground">Work Mode</label>
-                <Select value={selectedWorkMode || "all"} onValueChange={setSelectedWorkMode}>
-                  <SelectTrigger className="h-9">
-                    <SelectValue placeholder="Any" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Any</SelectItem>
-                    {filters?.work_modes.map((mode) => (
-                      <SelectItem key={mode.value} value={mode.value}>
-                        {mode.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Experience Filter */}
-              <div className="space-y-1.5">
-                <label className="text-xs font-medium text-muted-foreground">Experience</label>
-                <Select value={selectedExperience || "0"} onValueChange={setSelectedExperience}>
-                  <SelectTrigger className="h-9">
-                    <SelectValue placeholder="Any" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {filters?.experience_levels.map((exp) => (
-                      <SelectItem key={exp.value} value={exp.value.toString()}>
-                        {exp.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Skill Search */}
-              <div className="space-y-1.5">
-                <label className="text-xs font-medium text-muted-foreground">Skill</label>
-                <Input
-                  placeholder="e.g., React, Python"
-                  value={skillSearch}
-                  onChange={(e) => setSkillSearch(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                  className="h-9"
-                />
-              </div>
-            </div>
-
-            <div className="flex gap-2">
-              {hasActiveFilters && (
-                <Button variant="ghost" size="sm" onClick={clearFilters}>
-                  <X className="w-4 h-4 mr-1" />
-                  Clear
-                </Button>
-              )}
-              <Button onClick={handleSearch} size="sm">
-                <Search className="w-4 h-4 mr-2" />
-                Search
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Results */}
+      {/* Main Content - 2 Column Layout */}
       <section className="py-8">
         <div className="container mx-auto px-4">
-          {isLoading ? (
-            <div className="flex items-center justify-center py-20">
-              <Loader2 className="w-8 h-8 animate-spin text-primary" />
-            </div>
-          ) : error ? (
-            <div className="text-center py-20">
-              <p className="text-destructive mb-4">{error}</p>
-              <Button onClick={loadTalent}>Try Again</Button>
-            </div>
-          ) : talent.length === 0 ? (
-            <div className="text-center py-20">
-              <Users className="w-16 h-16 mx-auto mb-4 text-muted-foreground/50" />
-              <h3 className="text-xl font-semibold mb-2">No Talent Found</h3>
-              <p className="text-muted-foreground mb-4">
-                Try adjusting your filters to see more results.
-              </p>
-              {hasActiveFilters && (
-                <Button variant="outline" onClick={clearFilters}>
-                  Clear Filters
-                </Button>
-              )}
-            </div>
-          ) : (
-            <>
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Left Column - Developer List (70%) */}
+            <div className="lg:w-[70%]">
+              {/* Results Header */}
               <div className="flex items-center justify-between mb-6">
-                <p className="text-muted-foreground">
-                  <span className="font-semibold text-foreground">{talent.length}</span> developers found
-                </p>
-                {hasActiveFilters && (
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Filter className="w-4 h-4" />
-                    Filters applied
-                  </div>
-                )}
+                <div>
+                  <h2 className="text-lg font-medium">Available Talent</h2>
+                  <p className="text-sm text-muted-foreground">
+                    {isLoading ? "Loading..." : `${talent.length} developers match your criteria`}
+                  </p>
+                </div>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {talent.map((dev) => (
-                  <TalentCard key={dev.id} developer={dev} />
-                ))}
+              {/* Developer Cards */}
+              {isLoading ? (
+                <div className="flex items-center justify-center py-20">
+                  <Loader2 className="w-6 h-6 animate-spin text-primary" />
+                </div>
+              ) : error ? (
+                <Card className="p-12 text-center">
+                  <p className="text-destructive mb-4">{error}</p>
+                  <Button onClick={loadTalent} variant="outline">Try Again</Button>
+                </Card>
+              ) : talent.length === 0 ? (
+                <Card className="p-12 text-center">
+                  <Users className="w-12 h-12 mx-auto mb-4 text-muted-foreground/40" />
+                  <h3 className="font-medium mb-2">No developers found</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Try adjusting your filters to see more results
+                  </p>
+                  {hasActiveFilters && (
+                    <Button variant="outline" size="sm" onClick={clearFilters}>
+                      Clear All Filters
+                    </Button>
+                  )}
+                </Card>
+              ) : (
+                <div className="space-y-4">
+                  {talent.map((dev) => (
+                    <TalentCard key={dev.id} developer={dev} />
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Right Column - Filters (30%) */}
+            <div className="lg:w-[30%]">
+              <div className="lg:sticky lg:top-24">
+                <Card className="p-6">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-2">
+                      <SlidersHorizontal className="w-4 h-4 text-muted-foreground" />
+                      <h3 className="font-medium">Filters</h3>
+                    </div>
+                    {hasActiveFilters && (
+                      <button
+                        onClick={clearFilters}
+                        className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        Clear all
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="space-y-5">
+                    {/* Skill Search */}
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Search Skills</label>
+                      <div className="relative">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                        <Input
+                          placeholder="React, Python, AWS..."
+                          value={skillSearch}
+                          onChange={(e) => setSkillSearch(e.target.value)}
+                          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                          className="pl-9"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Position Filter */}
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Role</label>
+                      <Select value={selectedPosition || "all"} onValueChange={setSelectedPosition}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="All Roles" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Roles</SelectItem>
+                          {filters?.positions.map((pos) => (
+                            <SelectItem key={pos.value} value={pos.value}>
+                              {pos.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    {/* Work Mode Filter */}
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Work Mode</label>
+                      <Select value={selectedWorkMode || "all"} onValueChange={setSelectedWorkMode}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Any" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">Any</SelectItem>
+                          {filters?.work_modes.map((mode) => (
+                            <SelectItem key={mode.value} value={mode.value}>
+                              {mode.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    {/* Experience Filter */}
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Experience</label>
+                      <Select value={selectedExperience || "0"} onValueChange={setSelectedExperience}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Any" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {filters?.experience_levels.map((exp) => (
+                            <SelectItem key={exp.value} value={exp.value.toString()}>
+                              {exp.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    {/* Apply Button */}
+                    <Button onClick={handleSearch} className="w-full">
+                      Apply Filters
+                    </Button>
+                  </div>
+                </Card>
+
+                {/* Help Card */}
+                <Card className="p-5 mt-4 bg-primary/5 border-primary/10">
+                  <h4 className="font-medium text-sm mb-2">Need help finding talent?</h4>
+                  <p className="text-xs text-muted-foreground mb-3">
+                    Our team can help you identify the perfect candidates for your requirements.
+                  </p>
+                  <Button variant="outline" size="sm" className="w-full" asChild>
+                    <a href="/lets-talk-business">Contact Us</a>
+                  </Button>
+                </Card>
               </div>
-            </>
-          )}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -297,89 +317,97 @@ const TalentPool = () => {
 
 const TalentCard = ({ developer }: { developer: TalentProfile }) => {
   return (
-    <Card className="p-6 hover:shadow-lg transition-shadow duration-300 border-border/50 hover:border-primary/30">
-      {/* Header */}
-      <div className="flex items-start justify-between mb-4">
-        <div>
-          <h3 className="font-semibold text-lg">{developer.display_name}</h3>
-          <p className="text-primary font-medium">{developer.position_display}</p>
+    <Card className="p-6 bg-background hover:shadow-md transition-all duration-200 border-border/50 hover:border-primary/20">
+      <div className="flex flex-col md:flex-row md:items-start gap-5">
+        {/* Avatar */}
+        <div className="flex-shrink-0">
+          <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-xl font-semibold text-primary">
+            {developer.display_name.charAt(0)}
+          </div>
         </div>
-        <Badge variant="secondary" className="text-xs">
-          {developer.years_of_experience}+ yrs
-        </Badge>
-      </div>
 
-      {/* Description */}
-      {developer.cover_letter && (
-        <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
-          {developer.cover_letter}
-        </p>
-      )}
+        {/* Content */}
+        <div className="flex-1 min-w-0">
+          {/* Header Row */}
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+            <div>
+              <h3 className="font-semibold text-lg leading-tight">{developer.display_name}</h3>
+              <p className="text-primary font-medium text-sm">{developer.position_display}</p>
+            </div>
+            <Badge variant="secondary" className="self-start text-xs px-2.5 py-1">
+              {developer.years_of_experience}+ years
+            </Badge>
+          </div>
 
-      {/* Skills */}
-      <div className="mb-4">
-        <div className="flex items-center gap-2 mb-2">
-          <Code className="w-4 h-4 text-muted-foreground" />
-          <span className="text-xs font-medium text-muted-foreground">Skills</span>
-        </div>
-        <div className="flex flex-wrap gap-1.5">
-          {developer.skills.slice(0, 5).map((skill, idx) => (
-            <Badge key={idx} variant="outline" className="text-xs font-normal">
-              {skill}
-            </Badge>
-          ))}
-          {developer.skills.length > 5 && (
-            <Badge variant="outline" className="text-xs font-normal text-muted-foreground">
-              +{developer.skills.length - 5}
-            </Badge>
+          {/* Description */}
+          {developer.cover_letter && (
+            <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+              {developer.cover_letter}
+            </p>
           )}
-        </div>
-      </div>
 
-      {/* Languages */}
-      {developer.languages.length > 0 && (
-        <div className="mb-4">
-          <p className="text-xs text-muted-foreground mb-1.5">Languages</p>
-          <p className="text-sm">{developer.languages.slice(0, 4).join(", ")}</p>
-        </div>
-      )}
+          {/* Skills */}
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {developer.skills.slice(0, 6).map((skill, idx) => (
+              <span
+                key={idx}
+                className="inline-flex items-center px-2.5 py-1 rounded-md bg-muted text-xs font-medium"
+              >
+                {skill}
+              </span>
+            ))}
+            {developer.skills.length > 6 && (
+              <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-muted/50 text-xs text-muted-foreground">
+                +{developer.skills.length - 6} more
+              </span>
+            )}
+          </div>
 
-      {/* Links */}
-      <div className="flex gap-2 pt-4 border-t">
-        {developer.github_url && (
-          <a
-            href={developer.github_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
-          >
-            <Github className="w-4 h-4" />
-          </a>
-        )}
-        {developer.linkedin_url && (
-          <a
-            href={developer.linkedin_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
-          >
-            <Linkedin className="w-4 h-4" />
-          </a>
-        )}
-        {developer.portfolio_url && (
-          <a
-            href={developer.portfolio_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
-          >
-            <ExternalLink className="w-4 h-4" />
-          </a>
-        )}
-        <div className="flex-1" />
-        <Button size="sm" asChild>
-          <Link to={`/talent-pool/${developer.id}`}>Details</Link>
-        </Button>
+          {/* Footer */}
+          <div className="flex items-center justify-between pt-4 border-t border-border/50">
+            {/* Social Links */}
+            <div className="flex items-center gap-1">
+              {developer.github_url && (
+                <a
+                  href={developer.github_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                >
+                  <Github className="w-4 h-4" />
+                </a>
+              )}
+              {developer.linkedin_url && (
+                <a
+                  href={developer.linkedin_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                >
+                  <Linkedin className="w-4 h-4" />
+                </a>
+              )}
+              {developer.portfolio_url && (
+                <a
+                  href={developer.portfolio_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              )}
+            </div>
+
+            {/* View Profile Button */}
+            <Button variant="ghost" size="sm" className="group" asChild>
+              <Link to={`/talent-pool/${developer.id}`}>
+                View Profile
+                <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+            </Button>
+          </div>
+        </div>
       </div>
     </Card>
   );
