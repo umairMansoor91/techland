@@ -24,8 +24,6 @@ import {
   Globe,
   X,
   Clock,
-  MapPin,
-  Calendar,
   MessageSquare,
 } from "lucide-react";
 import {
@@ -480,43 +478,16 @@ const TalentDrawer = ({ developer, onClose }: TalentDrawerProps) => {
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6">
+        <div className="flex-1 overflow-y-auto p-6 space-y-5">
           {/* Quick Stats */}
-          <div className="grid grid-cols-2 gap-3">
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-              <Clock className="w-5 h-5 text-primary" />
-              <div>
-                <p className="text-xs text-muted-foreground">Experience</p>
-                <p className="font-semibold">{developer.years_of_experience}+ years</p>
-              </div>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted/60">
+              <Clock className="w-3.5 h-3.5 text-primary" />
+              <span className="text-sm font-medium">{developer.years_of_experience}+ yrs exp</span>
             </div>
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-              <Globe className="w-5 h-5 text-emerald-500" />
-              <div>
-                <p className="text-xs text-muted-foreground">English</p>
-                <p className="font-semibold">{developer.english_proficiency_display}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-              <MapPin className="w-5 h-5 text-blue-500" />
-              <div>
-                <p className="text-xs text-muted-foreground">Work Mode</p>
-                <p className="font-semibold">{developer.work_mode_display}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-              <Calendar className="w-5 h-5 text-orange-500" />
-              <div>
-                <p className="text-xs text-muted-foreground">Available</p>
-                <p className="font-semibold">
-                  {new Date(developer.available_from) <= new Date()
-                    ? "Immediately"
-                    : new Date(developer.available_from).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                      })}
-                </p>
-              </div>
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10">
+              <Globe className="w-3.5 h-3.5 text-emerald-500" />
+              <span className="text-sm font-medium text-emerald-600 dark:text-emerald-400">{developer.english_proficiency_display} English</span>
             </div>
           </div>
 
@@ -531,15 +502,15 @@ const TalentDrawer = ({ developer, onClose }: TalentDrawerProps) => {
           {/* Skills */}
           {developer.skills.length > 0 && (
             <div>
-              <div className="flex items-center gap-2 mb-3">
-                <Code2 className="w-4 h-4 text-violet-500" />
-                <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Skills</h3>
+              <div className="flex items-center gap-1.5 mb-2">
+                <Code2 className="w-3.5 h-3.5 text-violet-500" />
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Skills</h3>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {developer.skills.map((skill, idx) => (
                   <span
                     key={idx}
-                    className="px-3 py-1.5 rounded-lg text-sm bg-violet-500 text-white font-medium"
+                    className="px-2 py-0.5 rounded text-xs bg-violet-500/15 text-violet-600 dark:text-violet-400 font-medium"
                   >
                     {skill}
                   </span>
@@ -551,15 +522,15 @@ const TalentDrawer = ({ developer, onClose }: TalentDrawerProps) => {
           {/* Languages */}
           {developer.languages.length > 0 && (
             <div>
-              <div className="flex items-center gap-2 mb-3">
-                <Terminal className="w-4 h-4 text-sky-500" />
-                <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Programming Languages</h3>
+              <div className="flex items-center gap-1.5 mb-2">
+                <Terminal className="w-3.5 h-3.5 text-sky-500" />
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Languages</h3>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {developer.languages.map((lang, idx) => (
                   <span
                     key={idx}
-                    className="px-3 py-1.5 rounded-lg text-sm bg-sky-500 text-white font-medium"
+                    className="px-2 py-0.5 rounded text-xs bg-sky-500/15 text-sky-600 dark:text-sky-400 font-medium"
                   >
                     {lang}
                   </span>
@@ -571,28 +542,20 @@ const TalentDrawer = ({ developer, onClose }: TalentDrawerProps) => {
           {/* Frameworks */}
           {developer.tools.length > 0 && (
             <div>
-              <div className="flex items-center gap-2 mb-3">
-                <Wrench className="w-4 h-4 text-amber-500" />
-                <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Frameworks & Tools</h3>
+              <div className="flex items-center gap-1.5 mb-2">
+                <Wrench className="w-3.5 h-3.5 text-amber-500" />
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Frameworks & Tools</h3>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {developer.tools.map((tool, idx) => (
                   <span
                     key={idx}
-                    className="px-3 py-1.5 rounded-lg text-sm bg-amber-500 text-white font-medium"
+                    className="px-2 py-0.5 rounded text-xs bg-amber-500/15 text-amber-600 dark:text-amber-400 font-medium"
                   >
                     {tool}
                   </span>
                 ))}
               </div>
-            </div>
-          )}
-
-          {/* Relocation */}
-          {developer.willing_to_relocate && (
-            <div className="flex items-center gap-2 p-3 rounded-lg bg-green-500/10 text-green-600 dark:text-green-400">
-              <MapPin className="w-4 h-4" />
-              <span className="text-sm font-medium">Open to relocation</span>
             </div>
           )}
         </div>
