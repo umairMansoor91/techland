@@ -78,15 +78,18 @@ const TalentPool = () => {
     }
   };
 
-  const loadTalent = async () => {
+  const loadTalent = async (overrideFilters?: { position?: string; skill?: string }) => {
     if (!token) return;
     setIsLoading(true);
     setError(null);
 
+    const position = overrideFilters?.position ?? selectedPosition;
+    const skill = overrideFilters?.skill ?? skillSearch;
+
     try {
       const data = await getTalentPool(token, {
-        position: selectedPosition && selectedPosition !== "all" ? selectedPosition : undefined,
-        skill: skillSearch || undefined,
+        position: position && position !== "all" ? position : undefined,
+        skill: skill || undefined,
       });
       setTalent(data.talent);
     } catch (err) {
@@ -120,7 +123,7 @@ const TalentPool = () => {
   const clearFilters = () => {
     setSelectedPosition("all");
     setSkillSearch("");
-    setTimeout(loadTalent, 0);
+    loadTalent({ position: "all", skill: "" });
   };
 
   const hasActiveFilters =
@@ -177,7 +180,7 @@ const TalentPool = () => {
               ) : error ? (
                 <Card className="p-12 text-center">
                   <p className="text-destructive mb-4">{error}</p>
-                  <Button onClick={loadTalent} variant="outline">Try Again</Button>
+                  <Button onClick={() => loadTalent()} variant="outline">Try Again</Button>
                 </Card>
               ) : talent.length === 0 ? (
                 <Card className="p-12 text-center">
