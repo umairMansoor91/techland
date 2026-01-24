@@ -1,4 +1,4 @@
-import { Cpu } from "lucide-react";
+import { Mail } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -47,16 +47,24 @@ const Footer = () => {
           {/* Company Info */}
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-2 mb-6">
-              <Cpu 
-                className="h-8 w-8 text-primary"
+              <img
+                src="/favicon.png"
+                alt="TechLand Logo"
+                className="h-8 w-8"
               />
               <span className="text-2xl font-bold gradient-text">TechLand</span>
             </div>
             <p className="text-secondary-foreground/80 mb-6 leading-relaxed max-w-md">
-              We help companies redefine the future through technology. Transform your business 
+              We help companies redefine the future through technology. Transform your business
               with cutting-edge software solutions tailored to your needs.
             </p>
-            
+            <a
+              href="mailto:contact@thetechland.com"
+              className="inline-flex items-center gap-2 text-secondary-foreground/70 hover:text-primary transition-colors"
+            >
+              <Mail className="w-4 h-4" />
+              <span>contact@thetechland.com</span>
+            </a>
           </div>
 
           {/* Footer Sections */}
