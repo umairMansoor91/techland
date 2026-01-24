@@ -7,6 +7,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
+# Customize admin site branding
+admin.site.site_header = "TechLand Admin"
+admin.site.site_title = "TechLand Admin Portal"
+admin.site.index_title = "Welcome to TechLand Admin"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
