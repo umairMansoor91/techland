@@ -17,7 +17,6 @@ import {
   LogOut,
   Search,
   Users,
-  SlidersHorizontal,
   Code2,
   Terminal,
   Wrench,
@@ -45,8 +44,6 @@ const TalentPool = () => {
 
   // Filter state
   const [selectedPosition, setSelectedPosition] = useState<string>("");
-  const [selectedWorkMode, setSelectedWorkMode] = useState<string>("");
-  const [selectedExperience, setSelectedExperience] = useState<string>("");
   const [skillSearch, setSkillSearch] = useState<string>("");
 
   const token = localStorage.getItem("client_token");
@@ -89,8 +86,6 @@ const TalentPool = () => {
     try {
       const data = await getTalentPool(token, {
         position: selectedPosition && selectedPosition !== "all" ? selectedPosition : undefined,
-        work_mode: selectedWorkMode && selectedWorkMode !== "all" ? selectedWorkMode : undefined,
-        min_experience: selectedExperience && selectedExperience !== "0" ? parseInt(selectedExperience) : undefined,
         skill: skillSearch || undefined,
       });
       setTalent(data.talent);
@@ -124,16 +119,12 @@ const TalentPool = () => {
 
   const clearFilters = () => {
     setSelectedPosition("all");
-    setSelectedWorkMode("all");
-    setSelectedExperience("0");
     setSkillSearch("");
     setTimeout(loadTalent, 0);
   };
 
   const hasActiveFilters =
     (selectedPosition && selectedPosition !== "all") ||
-    (selectedWorkMode && selectedWorkMode !== "all") ||
-    (selectedExperience && selectedExperience !== "0") ||
     skillSearch;
 
   if (!token) {
@@ -217,44 +208,36 @@ const TalentPool = () => {
 
             {/* Right Column - Filters (30%) */}
             <div className="lg:w-[30%]">
-              <div className="lg:sticky lg:top-24">
-                <Card className="p-6">
-                  <div className="flex items-center justify-between mb-6">
+              <div className="lg:sticky lg:top-24 space-y-4">
+                {/* Search Card */}
+                <Card className="overflow-hidden border-0 shadow-sm">
+                  <div className="p-4 bg-gradient-to-r from-primary/5 to-accent/5 border-b">
                     <div className="flex items-center gap-2">
-                      <SlidersHorizontal className="w-4 h-4 text-muted-foreground" />
-                      <h3 className="font-medium">Filters</h3>
+                      <Search className="w-4 h-4 text-primary" />
+                      <h3 className="font-medium text-sm">Find Talent</h3>
                     </div>
-                    {hasActiveFilters && (
-                      <button
-                        onClick={clearFilters}
-                        className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        Clear all
-                      </button>
-                    )}
                   </div>
-
-                  <div className="space-y-5">
+                  <div className="p-4 space-y-4">
                     {/* Skill Search */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Search Skills</label>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Skills & Technologies</label>
                       <div className="relative">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/50" />
                         <Input
                           placeholder="React, Python, AWS..."
                           value={skillSearch}
                           onChange={(e) => setSkillSearch(e.target.value)}
                           onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                          className="pl-9"
+                          className="pl-9 h-9 text-sm bg-muted/30 border-0 focus-visible:ring-1 focus-visible:ring-primary/30"
                         />
                       </div>
                     </div>
 
                     {/* Position Filter */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Role</label>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Role</label>
                       <Select value={selectedPosition || "all"} onValueChange={setSelectedPosition}>
-                        <SelectTrigger>
+                        <SelectTrigger className="h-9 text-sm bg-muted/30 border-0 focus:ring-1 focus:ring-primary/30">
                           <SelectValue placeholder="All Roles" />
                         </SelectTrigger>
                         <SelectContent>
@@ -268,57 +251,31 @@ const TalentPool = () => {
                       </Select>
                     </div>
 
-                    {/* Work Mode Filter */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Work Mode</label>
-                      <Select value={selectedWorkMode || "all"} onValueChange={setSelectedWorkMode}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Any" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">Any</SelectItem>
-                          {filters?.work_modes.map((mode) => (
-                            <SelectItem key={mode.value} value={mode.value}>
-                              {mode.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                    {/* Action Buttons */}
+                    <div className="flex gap-2 pt-2">
+                      <Button onClick={handleSearch} size="sm" className="flex-1">
+                        Search
+                      </Button>
+                      {hasActiveFilters && (
+                        <Button onClick={clearFilters} variant="ghost" size="sm" className="text-muted-foreground">
+                          Clear
+                        </Button>
+                      )}
                     </div>
-
-                    {/* Experience Filter */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Experience</label>
-                      <Select value={selectedExperience || "0"} onValueChange={setSelectedExperience}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Any" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {filters?.experience_levels.map((exp) => (
-                            <SelectItem key={exp.value} value={exp.value.toString()}>
-                              {exp.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    {/* Apply Button */}
-                    <Button onClick={handleSearch} className="w-full">
-                      Apply Filters
-                    </Button>
                   </div>
                 </Card>
 
                 {/* Help Card */}
-                <Card className="p-5 mt-4 bg-primary/5 border-primary/10">
-                  <h4 className="font-medium text-sm mb-2">Need help finding talent?</h4>
-                  <p className="text-xs text-muted-foreground mb-3">
-                    Our team can help you identify the perfect candidates for your requirements.
-                  </p>
-                  <Button variant="outline" size="sm" className="w-full" asChild>
-                    <a href="/lets-talk-business">Contact Us</a>
-                  </Button>
+                <Card className="overflow-hidden border-0 shadow-sm bg-gradient-to-br from-primary/5 via-background to-accent/5">
+                  <div className="p-4">
+                    <h4 className="font-medium text-sm mb-1">Need help?</h4>
+                    <p className="text-xs text-muted-foreground mb-3">
+                      Our team can help you find the perfect candidates.
+                    </p>
+                    <Button variant="outline" size="sm" className="w-full h-8 text-xs" asChild>
+                      <a href="/lets-talk-business">Contact Us</a>
+                    </Button>
+                  </div>
                 </Card>
               </div>
             </div>
