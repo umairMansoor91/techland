@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -455,7 +456,9 @@ const TalentDrawer = ({ developer, onClose }: TalentDrawerProps) => {
           {developer.cover_letter && (
             <div>
               <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">About</h3>
-              <p className="text-sm leading-relaxed">{developer.cover_letter}</p>
+              <div className="prose prose-sm dark:prose-invert max-w-none prose-headings:text-base prose-headings:font-semibold prose-headings:mt-4 prose-headings:mb-2 prose-p:text-sm prose-p:leading-relaxed prose-p:my-1 prose-ul:my-1 prose-li:my-0 prose-li:text-sm">
+                <ReactMarkdown>{developer.cover_letter}</ReactMarkdown>
+              </div>
             </div>
           )}
 
