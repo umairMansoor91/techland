@@ -473,7 +473,7 @@ const TalentDrawer = ({ developer, onClose }: TalentDrawerProps) => {
                 {developer.skills.map((skill, idx) => (
                   <span
                     key={idx}
-                    className="px-2 py-0.5 rounded text-xs bg-violet-500/15 text-violet-600 dark:text-violet-400 font-medium"
+                    className="px-2 py-0.5 rounded text-xs bg-violet-500 text-white font-medium"
                   >
                     {skill}
                   </span>
@@ -493,7 +493,7 @@ const TalentDrawer = ({ developer, onClose }: TalentDrawerProps) => {
                 {developer.languages.map((lang, idx) => (
                   <span
                     key={idx}
-                    className="px-2 py-0.5 rounded text-xs bg-sky-500/15 text-sky-600 dark:text-sky-400 font-medium"
+                    className="px-2 py-0.5 rounded text-xs bg-sky-500 text-white font-medium"
                   >
                     {lang}
                   </span>
@@ -513,7 +513,7 @@ const TalentDrawer = ({ developer, onClose }: TalentDrawerProps) => {
                 {developer.tools.map((tool, idx) => (
                   <span
                     key={idx}
-                    className="px-2 py-0.5 rounded text-xs bg-amber-500/15 text-amber-600 dark:text-amber-400 font-medium"
+                    className="px-2 py-0.5 rounded text-xs bg-amber-500 text-white font-medium"
                   >
                     {tool}
                   </span>
