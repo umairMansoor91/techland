@@ -186,7 +186,7 @@ const Services = () => {
               variant="outline"
               size="lg"
               onClick={handleToggle}
-              className="group border-primary/30 hover:border-primary hover:bg-primary/10"
+              className="group border-primary/30 hover:border-primary hover:bg-primary hover:text-white"
             >
               {showAll ? (
                 <>
