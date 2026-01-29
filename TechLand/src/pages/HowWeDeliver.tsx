@@ -4,41 +4,119 @@ import CTASection from "@/components/CTASection";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import {
-  Search,
+  Phone,
+  Target,
+  PenTool,
   Code,
+  TestTube,
   Rocket,
   HeadphonesIcon,
   CheckCircle2,
   Zap,
   Shield,
-  Users
+  Users,
+  ArrowDown
 } from "lucide-react";
 
 const HowWeDeliver = () => {
-  const deliveryStages = [
+  const journeySteps = [
     {
-      step: "01",
-      icon: Search,
-      title: "Discover",
-      description: "Deep-dive into your requirements, goals, and technical landscape"
+      phase: "Phase 1",
+      icon: Phone,
+      title: "Discovery Call",
+      subtitle: "Let's Talk",
+      description: "It all starts with a conversation. We listen to your ideas, challenges, and vision. No jargon, no pressure — just a genuine discussion about what you're trying to achieve.",
+      details: [
+        "30-minute introductory call",
+        "Understand your business context",
+        "Identify key challenges and opportunities",
+        "Discuss timeline and budget expectations"
+      ],
+      color: "from-blue-500 to-cyan-500"
     },
     {
-      step: "02",
+      phase: "Phase 2",
+      icon: Target,
+      title: "Understanding Your Goals",
+      subtitle: "Deep Dive",
+      description: "We dig deeper into your business objectives, pain points, and what success looks like for you. This is where we align our understanding with your expectations.",
+      details: [
+        "Stakeholder interviews and workshops",
+        "Document business requirements",
+        "Map out user journeys and workflows",
+        "Define success metrics and KPIs"
+      ],
+      color: "from-violet-500 to-purple-500"
+    },
+    {
+      phase: "Phase 3",
+      icon: PenTool,
+      title: "System Design & Planning",
+      subtitle: "Blueprint",
+      description: "Our architects craft the technical blueprint. We design a solution that's scalable, secure, and tailored to your needs — then present it for your approval.",
+      details: [
+        "Technical architecture design",
+        "Technology stack selection",
+        "Database and API design",
+        "Security and scalability planning"
+      ],
+      color: "from-amber-500 to-orange-500"
+    },
+    {
+      phase: "Phase 4",
       icon: Code,
-      title: "Design & Build",
-      description: "Architect solutions and develop with agile sprints and continuous feedback"
+      title: "Development Sprints",
+      subtitle: "Building",
+      description: "This is where ideas become reality. We work in agile sprints, delivering working features every 2 weeks. You'll see progress, give feedback, and stay in control.",
+      details: [
+        "2-week agile sprint cycles",
+        "Regular demos and progress updates",
+        "Continuous integration & deployment",
+        "Real-time collaboration and feedback"
+      ],
+      color: "from-emerald-500 to-teal-500"
     },
     {
-      step: "03",
+      phase: "Phase 5",
+      icon: TestTube,
+      title: "Testing & Quality Assurance",
+      subtitle: "Perfecting",
+      description: "We don't ship until it's right. Rigorous testing ensures everything works flawlessly — from functionality and performance to security and user experience.",
+      details: [
+        "Automated and manual testing",
+        "Performance and load testing",
+        "Security vulnerability assessment",
+        "User acceptance testing (UAT)"
+      ],
+      color: "from-rose-500 to-pink-500"
+    },
+    {
+      phase: "Phase 6",
       icon: Rocket,
-      title: "Deploy",
-      description: "Rigorous testing, seamless launch, and smooth production transition"
+      title: "Launch & Deployment",
+      subtitle: "Go Live",
+      description: "The big moment. We handle the deployment with zero downtime, ensuring a smooth transition to production. Your solution goes live, and we're right there with you.",
+      details: [
+        "Staged rollout strategy",
+        "Zero-downtime deployment",
+        "Data migration and validation",
+        "Go-live monitoring and support"
+      ],
+      color: "from-indigo-500 to-blue-500"
     },
     {
-      step: "04",
+      phase: "Phase 7",
       icon: HeadphonesIcon,
-      title: "Support",
-      description: "Ongoing monitoring, optimization, and dedicated support partnership"
+      title: "Ongoing Partnership",
+      subtitle: "Growing Together",
+      description: "Our relationship doesn't end at launch. We provide continuous support, monitor performance, and help you evolve the product as your business grows.",
+      details: [
+        "24/7 monitoring and alerts",
+        "Regular maintenance and updates",
+        "Performance optimization",
+        "Feature enhancements and scaling"
+      ],
+      color: "from-primary to-accent"
     }
   ];
 
@@ -68,8 +146,8 @@ const HowWeDeliver = () => {
                 A Process Built for <span className="gradient-text">Results</span>
               </h1>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Our streamlined 4-stage framework transforms your vision into reality with precision,
-                transparency, and a relentless focus on quality delivery.
+                From the first discovery call to ongoing partnership, we guide you through every step
+                with transparency, expertise, and a relentless focus on your success.
               </p>
 
               {/* Key Highlights */}
@@ -122,8 +200,8 @@ const HowWeDeliver = () => {
                     <Rocket className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-2xl font-bold">4-Stage</div>
-                    <div className="text-sm text-muted-foreground">Proven Framework</div>
+                    <div className="text-2xl font-bold">7 Phases</div>
+                    <div className="text-sm text-muted-foreground">End-to-End Journey</div>
                   </div>
                 </div>
               </Card>
@@ -137,44 +215,78 @@ const HowWeDeliver = () => {
         </div>
       </section>
 
-      {/* 4-Stage Workflow */}
-      <section className="py-20 bg-muted/30 relative overflow-hidden">
+      {/* Journey Timeline */}
+      <section className="py-24 bg-muted/30 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16">
-            <Badge className="mb-4">Our Process</Badge>
+          <div className="text-center mb-20">
+            <Badge className="mb-4">Your Journey With Us</Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              <span className="gradient-text">4-Stage</span> Delivery Framework
+              From First Call to <span className="gradient-text">Lasting Partnership</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Every project follows our proven methodology for consistent, exceptional results
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              Every successful project follows a clear path. Here's how we'll work together to bring your vision to life.
             </p>
           </div>
 
-          {/* Workflow Grid */}
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {deliveryStages.map((stage) => (
-              <div
-                key={stage.step}
-                className="flex items-start gap-5 bg-card/80 backdrop-blur-sm rounded-xl p-6 border border-border/40 hover:border-primary/50 hover:bg-card transition-all duration-300 group shadow-lg hover:shadow-xl"
-              >
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-primary/20">
-                  <stage.icon className="w-6 h-6 text-white" />
+          {/* Vertical Timeline */}
+          <div className="max-w-4xl mx-auto relative">
+            {/* Timeline Line */}
+            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/50 via-accent/50 to-primary/50 md:-translate-x-1/2"></div>
+
+            {journeySteps.map((step, index) => (
+              <div key={index} className="relative mb-12 last:mb-0">
+                {/* Timeline Node */}
+                <div className={`absolute left-8 md:left-1/2 w-4 h-4 rounded-full bg-gradient-to-br ${step.color} -translate-x-1/2 mt-8 ring-4 ring-background shadow-lg z-10`}></div>
+
+                {/* Content Card - Alternating sides on desktop */}
+                <div className={`ml-20 md:ml-0 md:w-[calc(50%-2rem)] ${index % 2 === 0 ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'}`}>
+                  <Card className="p-6 bg-card/80 backdrop-blur-sm border-border/40 hover:border-primary/30 transition-all duration-300 hover:shadow-xl group">
+                    {/* Phase Badge */}
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className={`text-xs font-bold text-white bg-gradient-to-r ${step.color} px-3 py-1 rounded-full`}>
+                        {step.phase}
+                      </span>
+                      <span className="text-sm text-muted-foreground">{step.subtitle}</span>
+                    </div>
+
+                    {/* Icon and Title */}
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                        <step.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                          {step.title}
+                        </h3>
+                      </div>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-muted-foreground leading-relaxed mb-5">
+                      {step.description}
+                    </p>
+
+                    {/* Details List */}
+                    <div className="space-y-2">
+                      {step.details.map((detail, idx) => (
+                        <div key={idx} className="flex items-center gap-2 text-sm">
+                          <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
+                          <span className="text-muted-foreground">{detail}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </Card>
                 </div>
-                <div className="pt-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">
-                      {stage.step}
-                    </span>
-                    <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
-                      {stage.title}
-                    </h3>
+
+                {/* Arrow Connector (except last item) */}
+                {index < journeySteps.length - 1 && (
+                  <div className="absolute left-8 md:left-1/2 -translate-x-1/2 mt-4 hidden md:block" style={{ top: 'calc(100% - 1rem)' }}>
+                    <ArrowDown className="w-5 h-5 text-muted-foreground/30" />
                   </div>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {stage.description}
-                  </p>
-                </div>
+                )}
               </div>
             ))}
           </div>
