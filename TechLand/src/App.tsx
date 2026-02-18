@@ -62,7 +62,7 @@ const App = () => (
           <Route path="/case-study/trade-america" element={<CaseStudyTradeAmerica />} />
           <Route path="/case-study/edugenius" element={<CaseStudyEduGenius />} />
           <Route path="/case-study/tramericaa" element={<CaseStudyTramericaa />} />
-          <Route path="/case-study/barrington-orthopedic" element={<CaseStudyBarrington />} />
+          <Route path="/case-study/ormond-dental" element={<CaseStudyBarrington />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/client-login" element={<ClientLogin />} />

@@ -27,7 +27,7 @@ const caseStudies: CaseStudyItem[] = [
     title: "Ormond Dental: AI-Powered Scheduling Transformation",
     description: "How a Voice AI Agent eliminated 30+ minute wait times, recovered 2,090 missed calls per month, and generated $120K in incremental annual revenue for a multi-location dental practice.",
     image: caseStudyHealthcare,
-    link: "/case-study/barrington-orthopedic",
+    link: "/case-study/ormond-dental",
     readTime: "10 min read"
   },
   {

@@ -55,7 +55,7 @@ const CaseStudyBarrington = () => {
         title="Ormond Dental: AI-Powered Scheduling Transformation"
         description="How Techland deployed a Voice AI Agent to eliminate 30+ minute wait times, recover 2,090 missed calls per month, and generate $120K in incremental annual revenue."
         image={caseStudyHealthcare}
-        url="/case-study/barrington-orthopedic"
+        url="/case-study/ormond-dental"
         type="case-study"
         publishedDate="2025-01-15T00:00:00Z"
         author="TechLand Team"
