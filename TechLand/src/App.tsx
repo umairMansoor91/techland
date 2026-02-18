@@ -16,6 +16,9 @@ import CaseStudyVersatileSolutions from "./pages/CaseStudyVersatileSolutions";
 import CaseStudyTradeAmerica from "./pages/CaseStudyTradeAmerica";
 import CaseStudyEduGenius from "./pages/CaseStudyEduGenius";
 import CaseStudyTramericaa from "./pages/CaseStudyTramericaa";
+import CaseStudyBarrington from "./pages/CaseStudyBarrington";
+import Blogs from "./pages/Blogs";
+import CaseStudies from "./pages/CaseStudies";
 import WhoWeAre from "./pages/WhoWeAre";
 import WhatWeDo from "./pages/WhatWeDo";
 import WhoWeHelp from "./pages/WhoWeHelp";
@@ -46,6 +49,8 @@ const App = () => (
           <Route path="/how-we-deliver" element={<HowWeDeliver />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/readers-corner" element={<ReadersCorner />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/lets-talk-business" element={<LetsTalkBusiness />} />
           <Route path="/blog/ai-future" element={<BlogAIFuture />} />
           <Route path="/blog/cloud-computing" element={<BlogCloudComputing />} />
@@ -57,6 +62,7 @@ const App = () => (
           <Route path="/case-study/trade-america" element={<CaseStudyTradeAmerica />} />
           <Route path="/case-study/edugenius" element={<CaseStudyEduGenius />} />
           <Route path="/case-study/tramericaa" element={<CaseStudyTramericaa />} />
+          <Route path="/case-study/barrington-orthopedic" element={<CaseStudyBarrington />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/client-login" element={<ClientLogin />} />

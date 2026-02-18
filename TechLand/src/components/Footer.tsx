@@ -1,4 +1,4 @@
-import { Mail } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -60,11 +60,15 @@ const Footer = () => {
             </p>
             <a
               href="mailto:contact@thetechland.com"
-              className="inline-flex items-center gap-2 text-secondary-foreground/70 hover:text-primary transition-colors"
+              className="inline-flex items-center gap-2 text-secondary-foreground/70 hover:text-primary transition-colors mb-4"
             >
               <Mail className="w-4 h-4" />
               <span>contact@thetechland.com</span>
             </a>
+            <div className="flex items-start gap-2 text-secondary-foreground/70">
+              <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
+              <span>Second Floor, Munawar Plaza, I-10 Markaz, Islamabad</span>
+            </div>
           </div>
 
           {/* Footer Sections */}

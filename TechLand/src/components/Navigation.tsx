@@ -41,8 +41,13 @@ const Navigation = () => {
       hasDropdown: false
     },
     {
-      label: "Reader's Corner",
-      href: '/readers-corner',
+      label: "Blogs",
+      href: '/blogs',
+      hasDropdown: false
+    },
+    {
+      label: "Case Studies",
+      href: '/case-studies',
       hasDropdown: false
     },
   ];

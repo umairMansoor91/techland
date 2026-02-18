@@ -52,10 +52,10 @@ const Hero = () => {
           </div>
           
           {/* Main Headline */}
-          <h1 className="text-5xl md:text-7xl lg:text-[6rem] xl:text-[7rem] font-bold text-hero-text leading-[1] tracking-tight mb-8">
-            <span className="block">2000+ engineers</span>
-            <span className="block mt-2">
-              <span className="gradient-text">in your time zone.</span>
+          <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-extralight text-hero-text leading-[1.1] tracking-tight mb-8">
+            <span className="block">We build AI that delivers</span>
+            <span className="block mt-1">
+              <span className="gradient-text font-medium">measurable transformation.</span>
             </span>
           </h1>
           

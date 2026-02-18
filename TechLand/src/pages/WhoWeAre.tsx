@@ -3,9 +3,7 @@ import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Users, Target, Award, Heart, Lightbulb, CheckCircle2, Rocket, Shield, Zap, Handshake, TrendingUp, Code2, Brain, Building2, Calendar, MapPin, Quote } from "lucide-react";
-import teamCollaboration from "@/assets/team-collaboration.jpg";
-import leadershipMeeting from "@/assets/leadership-meeting.jpg";
+import { Users, Target, Award, Heart, Lightbulb, CheckCircle2, Rocket, Shield, Zap, Handshake, TrendingUp, Code2, Building2, Calendar, MapPin } from "lucide-react";
 import officeCulture from "@/assets/office-culture.jpg";
 
 const WhoWeAre = () => {
@@ -50,64 +48,12 @@ const WhoWeAre = () => {
     }
   ];
 
-  const leaders = [
-    {
-      name: "Umair Mansoor",
-      initials: "UM",
-      role: "Chief Executive Officer",
-      bio: "15+ years in software engineering. Previously led engineering teams at enterprise SaaS companies. Founded TechLand to bridge the gap between technical talent and business outcomes.",
-      gradient: "from-primary to-accent"
-    },
-    {
-      name: "Hamza Rashid",
-      initials: "HR",
-      role: "Chief Operations Officer",
-      bio: "Former delivery lead at consulting firms serving Fortune 500 clients. Specializes in scaling engineering teams and establishing repeatable delivery processes.",
-      gradient: "from-accent to-primary"
-    },
-    {
-      name: "Tim Krug",
-      initials: "TK",
-      role: "Chief Financial Officer",
-      bio: "20+ years in financial leadership across technology and professional services. Ensures sustainable growth while maintaining competitive pricing for clients.",
-      gradient: "from-primary/80 to-accent/80"
-    },
-    {
-      name: "Dave Sanders",
-      initials: "DS",
-      role: "Chief Business Officer",
-      bio: "Built and sold two technology consultancies. Focuses on long-term client relationships and expanding TechLand's presence in North America and Europe.",
-      gradient: "from-accent/80 to-primary/80"
-    }
-  ];
-
-  const services = [
-    {
-      icon: Users,
-      title: "Staff Augmentation",
-      description: "Embed senior engineers directly into your team. You manage priorities, we provide the talent—React, Node, Python, cloud infrastructure, and more.",
-      features: ["Dedicated engineers", "Your tools & processes", "Flexible scaling"]
-    },
-    {
-      icon: Brain,
-      title: "AI & SaaS Consultancy",
-      description: "End-to-end product development from discovery to deployment. We build custom software, integrate AI capabilities, and help you launch faster.",
-      features: ["Full product teams", "AI integration", "Architecture design"]
-    }
-  ];
-
   const companyStats = [
     { value: "2019", label: "Founded", icon: Calendar },
     { value: "2000+", label: "Engineers", icon: Code2 },
     { value: "100+", label: "Projects Delivered", icon: Building2 },
     { value: "30+", label: "Countries", icon: MapPin }
   ];
-
-  const testimonial = {
-    quote: "TechLand's team integrated seamlessly with ours. They understood our codebase quickly and started contributing within the first week. No hand-holding required.",
-    author: "Engineering Director",
-    company: "Series B Fintech Startup"
-  };
 
   return (
     <div className="min-h-screen">
@@ -419,46 +365,6 @@ const WhoWeAre = () => {
               <div className="absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-2xl"></div>
               <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-gradient-to-br from-accent/20 to-primary/20 rounded-full blur-2xl"></div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Leadership Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16 animate-slide-up">
-            <Badge className="mb-4">Leadership</Badge>
-            <h2 className="text-4xl font-bold mb-6">Leadership <span className="gradient-text">Team</span></h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Experienced operators who have built and scaled technology teams
-            </p>
-          </div>
-
-          {/* Leadership Team Image */}
-          <div className="relative mb-16 rounded-2xl overflow-hidden group">
-            <img
-              src={leadershipMeeting}
-              alt="TechLand leadership team in strategic meeting"
-              className="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-700"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent"></div>
-            <div className="absolute bottom-8 left-8 text-white">
-              <h3 className="text-2xl font-bold mb-2">Our Leadership</h3>
-              <p className="text-white/80">Hands-on leaders who still write code and talk to clients</p>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            {leaders.map((leader, index) => (
-              <Card key={index} className="p-6 text-center hover:shadow-xl transition-all duration-300 group hover:-translate-y-2">
-                <div className={`w-20 h-20 mx-auto mb-5 rounded-full bg-gradient-to-br ${leader.gradient} flex items-center justify-center ring-4 ring-primary/10 group-hover:ring-primary/30 transition-all duration-300`}>
-                  <span className="text-2xl font-bold text-white">{leader.initials}</span>
-                </div>
-                <h3 className="text-lg font-semibold mb-2">{leader.name}</h3>
-                <Badge variant="outline" className="mb-3 text-xs">{leader.role}</Badge>
-                <p className="text-muted-foreground text-sm leading-relaxed">{leader.bio}</p>
-              </Card>
-            ))}
           </div>
         </div>
       </section>

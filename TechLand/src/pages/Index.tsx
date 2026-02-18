@@ -4,7 +4,6 @@ import IndustryCarousel from "@/components/IndustryCarousel";
 import Services from "@/components/Services";
 import FeaturedInsights from "@/components/FeaturedInsights";
 import StatsSection from "@/components/StatsSection";
-import ResourceAugmentation from "@/components/ResourceAugmentation";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 
@@ -17,7 +16,6 @@ const Index = () => {
       <Services />
       <FeaturedInsights />
       <StatsSection />
-      <ResourceAugmentation />
       <CTASection />
       <Footer />
     </div>
