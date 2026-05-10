@@ -53,9 +53,8 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-background/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
-    }`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+      }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -66,21 +65,19 @@ const Navigation = () => {
                 alt="TechLand Logo"
                 className="h-8 w-8"
               />
-              <span className={`text-xl font-bold transition-colors ${
-                isScrolled ? 'gradient-text' : 'text-white'
-              }`}>TechLand</span>
+              <span className={`text-xl font-bold transition-colors ${isScrolled ? 'gradient-text' : 'text-white'
+                }`}>TechLand Engineering</span>
             </a>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-6">
             {navItems.map((item) => (
-              <a 
+              <a
                 key={item.label}
                 href={item.href}
-                className={`transition-colors py-2 hover:scale-105 text-sm ${
-                  isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-primary-glow'
-                }`}
+                className={`transition-colors py-2 hover:scale-105 text-sm ${isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-primary-glow'
+                  }`}
               >
                 {item.label}
               </a>
@@ -89,8 +86,8 @@ const Navigation = () => {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
-            <Button 
-              variant="hero" 
+            <Button
+              variant="hero"
               size="sm"
               onClick={() => window.location.href = '/lets-talk-business'}
             >
@@ -113,8 +110,8 @@ const Navigation = () => {
             <div className="px-4 py-4 space-y-4">
               {navItems.map((item) => (
                 <div key={item.label}>
-                  <a 
-                    href={item.href} 
+                  <a
+                    href={item.href}
                     className="block w-full text-left py-2 text-foreground hover:text-primary transition-colors"
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -123,8 +120,8 @@ const Navigation = () => {
                 </div>
               ))}
               <div className="pt-4 space-y-2">
-                <Button 
-                  variant="hero" 
+                <Button
+                  variant="hero"
                   className="w-full"
                   onClick={() => window.location.href = '/lets-talk-business'}
                 >

@@ -52,7 +52,7 @@ const Footer = () => {
                 alt="TechLand Logo"
                 className="h-8 w-8"
               />
-              <span className="text-2xl font-bold gradient-text">TechLand</span>
+              <span className="text-2xl font-bold gradient-text">TechLand Engineering</span>
             </div>
             <p className="text-secondary-foreground/80 mb-6 leading-relaxed max-w-md">
               We help companies redefine the future through technology. Transform your business
