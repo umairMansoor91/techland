@@ -62,7 +62,7 @@ const Navigation = () => {
           <div className="flex items-center space-x-2">
             <a href="/" className="flex items-center space-x-2 transition-all duration-200 hover:scale-105">
               <img
-                src="/favicon.png"
+                src="/favicon.png?v=2"
                 alt="TechLand Logo"
                 className="h-8 w-8"
               />
