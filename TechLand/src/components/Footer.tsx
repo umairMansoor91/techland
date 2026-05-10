@@ -59,11 +59,11 @@ const Footer = () => {
               with cutting-edge software solutions tailored to your needs.
             </p>
             <a
-              href="mailto:contact@thetechland.com"
+              href="mailto:contact@techlandengineering.com"
               className="inline-flex items-center gap-2 text-secondary-foreground/70 hover:text-primary transition-colors mb-4"
             >
               <Mail className="w-4 h-4" />
-              <span>contact@thetechland.com</span>
+              <span>contact@techlandengineering.com</span>
             </a>
             <div className="flex items-start gap-2 text-secondary-foreground/70">
               <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
@@ -79,7 +79,7 @@ const Footer = () => {
                 {section.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
                     {typeof link === 'object' ? (
-                      <a 
+                      <a
                         href={link.href}
                         className="text-secondary-foreground/70 hover:text-primary transition-colors duration-200"
                       >
