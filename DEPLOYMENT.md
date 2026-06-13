@@ -7,7 +7,7 @@ Deploy TechLand on a Contabo VPS (Ubuntu 22.04).
 | Setting | Value |
 |---------|-------|
 | **VPS IP** | `84.247.177.56` |
-| **Domain** | `thetechland.com` |
+| **Domain** | `techlandengineering.com` |
 | **SSH User** | `root` |
 | **SSH Password** | `saadhamza` |
 | **Database** | PostgreSQL |
@@ -218,9 +218,9 @@ pg_dump -U techland_user -h localhost techland_db > backup.sql
 
 ## URLs
 
-- Website: `https://thetechland.com`
-- Admin: `https://thetechland.com/admin/`
-- API Docs: `https://thetechland.com/api/docs/`
+- Website: `https://techlandengineering.com`
+- Admin: `https://techlandengineering.com/admin/`
+- API Docs: `https://techlandengineering.com/api/docs/`
 
 ## DNS Configuration
 
@@ -235,5 +235,5 @@ Add these A records in your domain registrar:
 
 ```bash
 ssh root@84.247.177.56
-sudo certbot --nginx -d thetechland.com -d www.thetechland.com
+sudo certbot --nginx -d techlandengineering.com -d www.techlandengineering.com
 ```
